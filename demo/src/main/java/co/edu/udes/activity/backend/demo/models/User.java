@@ -25,6 +25,11 @@ public class User {
 
     @Column(name = "status")
     private Boolean status;
+    
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false) // Crea la columna en la BD
+    private Role role;
+
 
     public User (){
 

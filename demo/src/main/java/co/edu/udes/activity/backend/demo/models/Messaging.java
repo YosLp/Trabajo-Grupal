@@ -17,7 +17,7 @@ public class Messaging {
     @Column(name="content")
     private String content;
 
-    @Column(name="sendDate")
+    @Column(name="send_Date")
     private LocalDateTime sendDate;
 
     @Column(name="read")
@@ -31,6 +31,6 @@ public class Messaging {
     private User sender;
 
     @ManyToOne
-    @JoinColumn(name="receiver", nullable = false)
+    @JoinColumn(name="receiver_id", nullable = false)
     private User receiver;
 }

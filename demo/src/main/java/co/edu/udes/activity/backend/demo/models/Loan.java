@@ -21,7 +21,7 @@ public class Loan {
     private LocalDateTime returnDate;
 
     @ManyToOne
-    @JoinColumn(name ="student:_id", nullable= false)
+    @JoinColumn(name ="student_id", nullable= false)
     private Student student;
 
     @ManyToMany(fetch = FetchType.EAGER)

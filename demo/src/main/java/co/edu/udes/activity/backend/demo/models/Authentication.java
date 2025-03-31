@@ -1,5 +1,6 @@
 package co.edu.udes.activity.backend.demo.models;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,13 +14,13 @@ public class Authentication {
     private long id;
 
     @Column (name="session_token")
-    private int sessionToken;
+    private String sessionToken;
 
     @Column (name="expiration_date")
-    private int expirationDate;
+    private LocalDateTime  expirationDate;
 
-    @Column (name="failedAttempst")
-    private int failedAttempst;
+    @Column (name="failedAttempts")
+    private int failedAttempts;
 
     @Column (name="locked")
     private boolean locked;

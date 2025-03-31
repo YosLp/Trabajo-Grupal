@@ -36,7 +36,7 @@ public class Course {
     @Column(name = "capacity")
     private int capacity;
 
-    // Relaciones con otras tablas
+
     @ManyToOne
     @JoinColumn(name = "idCareer", nullable = false)
     private Career career;

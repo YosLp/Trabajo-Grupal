@@ -27,7 +27,6 @@ public class Subject {
     private String competencies;
 
 
-    // Relación con Prerequisite
     @ManyToOne
     @JoinColumn(name = "idPrerequisite")
     private Prerequisite prerequisite;

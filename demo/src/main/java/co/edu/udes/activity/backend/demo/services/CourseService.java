@@ -13,22 +13,22 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
-    // Obtener todos los cursos
+   
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    // Obtener un curso por ID
+   
     public Optional<Course> getCourseById(int id) {
         return courseRepository.findById(id);
     }
 
-    // Guardar un nuevo curso
+   
     public Course saveCourse(Course course) {
         return courseRepository.save(course);
     }
 
-    // Actualizar un curso existente
+    
     public Course updateCourse(int id, Course updatedCourse) {
         return courseRepository.findById(id).map(course -> {
             course.setName(updatedCourse.getName());
@@ -46,7 +46,7 @@ public class CourseService {
         }).orElse(null);
     }
 
-    // Eliminar un curso por ID
+ 
     public boolean deleteCourse(int id) {
         if (courseRepository.existsById(id)) {
             courseRepository.deleteById(id);

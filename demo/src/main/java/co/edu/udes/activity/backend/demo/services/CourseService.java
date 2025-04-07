@@ -19,7 +19,7 @@ public class CourseService {
     }
 
    
-    public Optional<Course> getCourseById(int id) {
+    public Optional<Course> getCourseById(long id) {
         return courseRepository.findById(id);
     }
 
@@ -29,12 +29,12 @@ public class CourseService {
     }
 
     
-    public Course updateCourse(int id, Course updatedCourse) {
+    public Course updateCourse(long id, Course updatedCourse) {
         return courseRepository.findById(id).map(course -> {
             course.setName(updatedCourse.getName());
             course.setDescription(updatedCourse.getDescription());
-            course.setStarDate(updatedCourse.getStarDate());
-            course.setEndDate(updatedCourse.getEndDate());
+            course.setStartdate(updatedCourse.getStartdate());
+            course.setEnddate(updatedCourse.getEnddate());
             course.setContent(updatedCourse.getContent());
             course.setObjetives(updatedCourse.getObjetives());
             course.setCompetencies(updatedCourse.getCompetencies());
@@ -47,7 +47,7 @@ public class CourseService {
     }
 
  
-    public boolean deleteCourse(int id) {
+    public boolean deleteCourse(long id) {
         if (courseRepository.existsById(id)) {
             courseRepository.deleteById(id);
             return true;

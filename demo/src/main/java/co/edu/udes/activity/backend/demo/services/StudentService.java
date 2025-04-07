@@ -1,7 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Student;
-import co.edu.udes.activity.backend.demo.repository.StudentRepository;
+import co.edu.udes.activity.backend.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(int id) {
+    public Optional<Student> getStudentById(long id) {
         return studentRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student updateStudent(int id, Student updatedStudent) {
+    public Student updateStudent(long id, Student updatedStudent) {
         return studentRepository.findById(id).map(student -> {
             student.setAddress(updatedStudent.getAddress());
             student.setStatusStudent(updatedStudent.getStatusStudent());
@@ -36,7 +36,7 @@ public class StudentService {
         }).orElse(null);
     }
 
-    public boolean deleteStudent(int id) {
+    public boolean deleteStudent(long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
             return true;

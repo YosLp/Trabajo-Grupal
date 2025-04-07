@@ -1,7 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Teacher;
-import co.edu.udes.activity.backend.demo.repository.TeacherRepository;
+import co.edu.udes.activity.backend.demo.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

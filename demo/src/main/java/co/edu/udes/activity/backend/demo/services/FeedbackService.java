@@ -1,7 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Feedback;
-import co.edu.udes.activity.backend.demo.repository.FeedbackRepository;
+import co.edu.udes.activity.backend.demo.repositories.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
-    public Optional<Feedback> getFeedbackById(int id) {
+    public Optional<Feedback> getFeedbackById(long id) {
         return feedbackRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class FeedbackService {
         return feedbackRepository.save(feedback);
     }
 
-    public Feedback updateFeedback(int id, Feedback updatedFeedback) {
+    public Feedback updateFeedback(long id, Feedback updatedFeedback) {
         return feedbackRepository.findById(id).map(feedback -> {
             feedback.setMessage(updatedFeedback.getMessage());
             feedback.setSentAt(updatedFeedback.getSentAt());
@@ -36,7 +36,7 @@ public class FeedbackService {
         }).orElse(null);
     }
 
-    public boolean deleteFeedback(int id) {
+    public boolean deleteFeedback(long id) {
         if (feedbackRepository.existsById(id)) {
             feedbackRepository.deleteById(id);
             return true;

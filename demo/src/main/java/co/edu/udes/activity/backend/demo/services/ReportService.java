@@ -1,7 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Report;
-import co.edu.udes.activity.backend.demo.repository.ReportRepository;
+import co.edu.udes.activity.backend.demo.repositories.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ReportService {
         return reportRepository.findAll();
     }
 
-    public Optional<Report> getReportById(int id) {
+    public Optional<Report> getReportById(long id) {
         return reportRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
-    public Report updateReport(int id, Report updatedReport) {
+    public Report updateReport(long id, Report updatedReport) {
         return reportRepository.findById(id).map(report -> {
             report.setReportType(updatedReport.getReportType());
             report.setGenerationDate(updatedReport.getGenerationDate());
@@ -38,7 +38,7 @@ public class ReportService {
         }).orElse(null);
     }
 
-    public boolean deleteReport(int id) {
+    public boolean deleteReport(long id) {
         if (reportRepository.existsById(id)) {
             reportRepository.deleteById(id);
             return true;

@@ -3,14 +3,16 @@ package co.edu.udes.activity.backend.demo.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Table (name="Course")
 public class Course {
 
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idcourse;
+    private long idcourse;
 
     @Column(nullable = false)
     private String name;
@@ -18,8 +20,8 @@ public class Course {
     @Column(length = 500)
     private String description;
 
-   @Column(name = "stardate")
-    private Date stardate;
+    @Column(name = "startdate")
+    private Date startdate;
 
     @Column(name = "enddate")
     private Date enddate;
@@ -27,10 +29,10 @@ public class Course {
     @Column(length = 1000)
     private String content;
 
-     @Column(name = "objetives")
+    @Column(name = "objetives")
     private String objetives;
 
-     @Column(name = "competencies")
+    @Column(name = "competencies")
     private String competencies;
 
     @Column(name = "capacity")

@@ -12,7 +12,7 @@ import java.util.Optional;
 public class SpaceService {
 
     @Autowired
-    private SpaceRepository spaceRepository;
+    SpaceRepository spaceRepository;
 
     public List<Space> getAllSpaces() {
         return spaceRepository.findAll();

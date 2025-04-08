@@ -11,7 +11,7 @@ import java.util.Optional;
 public class LoanService {
 
     @Autowired
-    private LoanRepository loanRepository;
+    LoanRepository loanRepository;
 
     public List<Loan> getAllLoans() {
         return loanRepository.findAll();

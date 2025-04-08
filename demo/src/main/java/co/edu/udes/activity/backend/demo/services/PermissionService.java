@@ -11,7 +11,7 @@ import java.util.Optional;
 public class PermissionService {
 
     @Autowired
-    private PermissionRepository permissionRepository;
+    public PermissionRepository permissionRepository;
 
     public List<Permission> getAllPermissions() {
         return permissionRepository.findAll();

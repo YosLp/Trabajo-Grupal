@@ -26,9 +26,9 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name="messaging_id", nullable =false)
-    private Messaging menssaging;
+    private Messaging messaging;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="receiver_id", nullable = false)
     private User receiver;
 }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package co.edu.udes.activity.backend.demo.controller;
+=======
+package co.edu.udes.activity.backend.demo.controllers;
+>>>>>>> feature-lusbin
 
 import co.edu.udes.activity.backend.demo.models.Enrollment;
 import co.edu.udes.activity.backend.demo.services.EnrollmentService;

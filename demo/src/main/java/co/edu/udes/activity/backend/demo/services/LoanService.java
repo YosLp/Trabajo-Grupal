@@ -11,7 +11,11 @@ import java.util.Optional;
 public class LoanService {
 
     @Autowired
+<<<<<<< HEAD
     LoanRepository loanRepository;
+=======
+    private LoanRepository loanRepository;
+>>>>>>> feature-lusbin
 
     public List<Loan> getAllLoans() {
         return loanRepository.findAll();

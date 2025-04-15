@@ -2,7 +2,11 @@ package co.edu.udes.activity.backend.demo.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+<<<<<<< HEAD
 import java.time.LocalDateTime;
+=======
+
+>>>>>>> feature-lusbin
 import java.util.Date;
 import java.util.List;
 

@@ -11,7 +11,11 @@ import java.util.Optional;
 public class PermissionService {
 
     @Autowired
+<<<<<<< HEAD
     public PermissionRepository permissionRepository;
+=======
+    private PermissionRepository permissionRepository;
+>>>>>>> feature-lusbin
 
     public List<Permission> getAllPermissions() {
         return permissionRepository.findAll();

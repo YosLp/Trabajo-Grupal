@@ -1,11 +1,29 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+<<<<<<< HEAD
 import co.edu.udes.activity.backend.demo.models.Authentication;
 import co.edu.udes.activity.backend.demo.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+=======
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import co.edu.udes.activity.backend.demo.models.Authentication;
+import co.edu.udes.activity.backend.demo.services.AuthenticationService;
+>>>>>>> feature-lusbin
 
 @RestController
 @RequestMapping("/api/authentications")

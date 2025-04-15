@@ -22,9 +22,6 @@ public class Report {
     @Column(name = "content", length = 2000, nullable = false)
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "idSubject", nullable = false)
-    private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)

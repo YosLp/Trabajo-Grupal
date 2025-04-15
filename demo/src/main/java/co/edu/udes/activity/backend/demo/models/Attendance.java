@@ -22,4 +22,9 @@ public class Attendance {
         @Column(name = "status")
     private Boolean status;
 
+        @ManyToOne
+    @JoinColumn(name = "idSchedule", nullable = false)
+    private Schedule schedule;
+
+
 }

@@ -43,4 +43,21 @@ public class SpaceService {
         }
         return false;
     }
+
+    public boolean checkAvailability(Long spaceId) {
+        return spaceRepository.findById(spaceId)
+                .map(Space::isAvailable)
+                .orElse(false);
+    }
+
+    public boolean updateAvailability(Long spaceId, boolean available) {
+        Optional<Space> spaceOpt = spaceRepository.findById(spaceId);
+        if (spaceOpt.isPresent()) {
+            Space space = spaceOpt.get();
+            space.setAvailable(available);
+            spaceRepository.save(space);
+            return true;
+        }
+        return false;
+    }
 }

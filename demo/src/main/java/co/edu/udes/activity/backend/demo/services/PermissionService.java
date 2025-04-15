@@ -6,16 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import co.edu.udes.activity.backend.demo.models.User;
+import co.edu.udes.activity.backend.demo.repositories.UserRepository;
 
 @Service
 public class PermissionService {
 
     @Autowired
-<<<<<<< HEAD
-    public PermissionRepository permissionRepository;
-=======
-    private PermissionRepository permissionRepository;
->>>>>>> feature-lusbin
+    private  PermissionRepository permissionRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Permission> getAllPermissions() {
         return permissionRepository.findAll();
@@ -44,4 +45,31 @@ public class PermissionService {
         }
         return false;
     }
+
+    public boolean assignPermissionToUser(Long permissionId, Long userId) {
+        Optional<Permission> optPermission = permissionRepository.findById(permissionId);
+        Optional<User> optUser = userRepository.findById(userId);
+        if (optPermission.isPresent() && optUser.isPresent()) {
+            User user = optUser.get();
+            Permission permission = optPermission.get();
+            user.getRole().getPermissions().add(permission);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean revokePermissionFromUser(Long permissionId, Long userId) {
+        Optional<Permission> optPermission = permissionRepository.findById(permissionId);
+        Optional<User> optUser = userRepository.findById(userId);
+        if (optPermission.isPresent() && optUser.isPresent()) {
+            User user = optUser.get();
+            Permission permission = optPermission.get();
+            user.getRole().getPermissions().remove(permission);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
 }

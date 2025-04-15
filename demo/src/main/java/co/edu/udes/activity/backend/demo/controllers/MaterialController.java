@@ -3,9 +3,9 @@ package co.edu.udes.activity.backend.demo.controllers;
 import co.edu.udes.activity.backend.demo.models.Material;
 import co.edu.udes.activity.backend.demo.services.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/materials")
@@ -20,10 +20,11 @@ public class MaterialController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Material> getMaterialById(@PathVariable Long id) {
-        return materialService.getMaterialById(id);
+    public ResponseEntity<Material> getMaterialById(@PathVariable Long id) {
+        return materialService.getMaterialById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
     @PostMapping
     public Material createMaterial(@RequestBody Material material) {
         return materialService.saveMaterial(material);
@@ -39,4 +40,22 @@ public class MaterialController {
         boolean deleted = materialService.deleteMaterial(id);
         return deleted ? "Material eliminado correctamente" : "No se encontró el material con ID: " + id;
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Material> updateStatus(@PathVariable Long id, @RequestBody boolean status) {
+        Material updated = materialService.updateStatus(id, status);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/available")
+    public ResponseEntity<Boolean> checkAvailability(@PathVariable Long id) {
+        return ResponseEntity.ok(materialService.checkAvailability(id));
+    }
+
+    @PutMapping("/{id}/increase")
+    public ResponseEntity<Material> increaseAmount(@PathVariable Long id, @RequestParam int amount) {
+        Material updated = materialService.increaseAmount(id, amount);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    }
+
 }

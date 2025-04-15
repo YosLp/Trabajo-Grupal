@@ -31,7 +31,6 @@ public class ReportService {
             report.setReportType(updatedReport.getReportType());
             report.setGenerationDate(updatedReport.getGenerationDate());
             report.setContent(updatedReport.getContent());
-            report.setSubject(updatedReport.getSubject());
             report.setStudent(updatedReport.getStudent());
             report.setAcademicRecord(updatedReport.getAcademicRecord());
             return reportRepository.save(report);

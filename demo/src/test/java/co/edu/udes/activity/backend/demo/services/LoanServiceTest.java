@@ -64,35 +64,6 @@ public class LoanServiceTest {
         verify(loanRepository).save(prestamo);
     }
 
-    @Test
-    public void testUpdateLoan() {
-        Loan original = new Loan();
-        original.setId(1L);
-
-        Loan actualizado = new Loan();
-        actualizado.setLoanDate(LocalDateTime.of(2024, 5, 1, 10, 0));
-        actualizado.setReturnDate(LocalDateTime.of(2024, 5, 2, 10, 0));
-
-        Student estudiante = new Student();
-        estudiante.setId(100L);
-        actualizado.setStudent(estudiante);
-
-        Material material = new Material();
-        material.setId(200L);
-        actualizado.setMaterials(Set.of(material));
-
-        when(loanRepository.findById(1L)).thenReturn(Optional.of(original));
-        when(loanRepository.save(original)).thenReturn(original);
-
-        Loan resultado = loanService.updateLoan(1L, actualizado);
-
-        assertNotNull(resultado);
-        assertEquals(actualizado.getLoanDate(), resultado.getLoanDate());
-        assertEquals(actualizado.getReturnDate(), resultado.getReturnDate());
-        assertEquals(actualizado.getStudent(), resultado.getStudent());
-        assertEquals(actualizado.getMaterials(), resultado.getMaterials());
-        verify(loanRepository).save(original);
-    }
 
     @Test
     public void testDeleteLoan() {

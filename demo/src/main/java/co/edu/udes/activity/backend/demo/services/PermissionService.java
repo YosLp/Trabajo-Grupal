@@ -13,7 +13,7 @@ import co.edu.udes.activity.backend.demo.repositories.UserRepository;
 public class PermissionService {
 
     @Autowired
-    private  PermissionRepository permissionRepository;
+    PermissionRepository permissionRepository;
 
     @Autowired
     private UserRepository userRepository;

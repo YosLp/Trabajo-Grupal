@@ -1,6 +1,8 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.models.Role;
 import co.edu.udes.activity.backend.demo.models.User;
+import co.edu.udes.activity.backend.demo.repositories.RoleRepository;
 import co.edu.udes.activity.backend.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ public class UserService {
   
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -42,5 +47,31 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    public boolean authenticate(String email, String password) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.isPresent() && user.get().getPassword().equals(password);
+    }
+
+    public User changePassword(Long id, String newPassword) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setPassword(newPassword);
+            return userRepository.save(u);
+        }
+        return null;
+    }
+
+    public User assignRole(Long id, Long idRole) {
+        Optional<User> user = userRepository.findById(id);
+        Optional<Role> role = roleRepository.findById(idRole);
+        if(user.isPresent() && role.isPresent()) {
+            User u = user.get();
+            u.setRole(role.get());
+            return userRepository.save(u);
+        }
+        return null;
     }
 }

@@ -1,6 +1,4 @@
-
 package co.edu.udes.activity.backend.demo.controllers;
-
 
 import co.edu.udes.activity.backend.demo.models.Evaluation;
 import co.edu.udes.activity.backend.demo.services.EvaluationService;
@@ -29,7 +27,12 @@ public class EvaluationController {
     }
 
     @PostMapping
-    public void createEvaluation(@RequestParam int type, @RequestParam int maxScore) {
+    public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
+        return evaluationService.saveEvaluation(evaluation);
+    }
+
+    @PostMapping("/custom")
+    public void createCustomEvaluation(@RequestParam int type, @RequestParam int maxScore) {
         evaluationService.createEvaluation(type, maxScore);
     }
 
@@ -43,8 +46,6 @@ public class EvaluationController {
     public String modifyEvaluation(@PathVariable int id, @RequestParam String details) {
         evaluationService.modifyEvaluation(id, details);
         return "Detalles de la evaluación actualizados";
-    public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
-        return evaluationService.saveEvaluation(evaluation);
     }
 
     @PutMapping("/{id}")

@@ -1,6 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Student;
+import co.edu.udes.activity.backend.demo.repository.StudentRepository;
 import co.edu.udes.activity.backend.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,25 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+
+    public Optional<Student> getStudentById(int id) {
 
     public Optional<Student> getStudentById(long id) {
         return studentRepository.findById(id);
     }
 
     public Student saveStudent(Student student) {
+
+    public Student registerStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public Student updateStudent(int id, Student updatedStudent) {
+    public Student registerStudent(Student student) {
         return studentRepository.save(student);
     }
 
@@ -33,6 +44,11 @@ public class StudentService {
             student.setRegistrationDate(updatedStudent.getRegistrationDate());
             student.setPhoneNumber(updatedStudent.getPhoneNumber());
             return studentRepository.save(student);
+        }).orElse(null); 
+    }
+
+    public boolean deleteStudent(int id) {
+    public boolean deleteStudent(long id) {
         }).orElse(null);
     }
 
@@ -43,4 +59,13 @@ public class StudentService {
         }
         return false;
     }
+
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    public Optional<Student> getStudentById(long id) {
+        return studentRepository.findById(id);
+    }
+
 }

@@ -22,6 +22,7 @@ public class EnrollmentController {
     }
 
     @GetMapping("/{id}")
+    public Optional<Enrollment> getEnrollmentById(@PathVariable Long id) {
     public Optional<Enrollment> getEnrollmentById(@PathVariable int id) {
         return enrollmentService.getEnrollmentById(id);
     }
@@ -32,11 +33,13 @@ public class EnrollmentController {
     }
 
     @PutMapping("/{id}")
+    public Enrollment updateEnrollment(@PathVariable Long id, @RequestBody Enrollment updatedEnrollment) {
     public Enrollment updateEnrollment(@PathVariable int id, @RequestBody Enrollment updatedEnrollment) {
         return enrollmentService.updateEnrollment(id, updatedEnrollment);
     }
 
     @DeleteMapping("/{id}")
+    public String deleteEnrollment(@PathVariable Long id) {
     public String deleteEnrollment(@PathVariable int id) {
         boolean deleted = enrollmentService.deleteEnrollment(id);
         return deleted ? "Matrícula eliminada correctamente" : "No se encontró la matrícula con ID: " + id;

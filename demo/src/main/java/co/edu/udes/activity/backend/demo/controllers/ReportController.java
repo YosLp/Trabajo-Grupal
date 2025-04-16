@@ -42,3 +42,4 @@ public class ReportController {
         return deleted ? "Reporte eliminado correctamente" : "No se encontró el reporte con ID: " + id;
     }
 }
+

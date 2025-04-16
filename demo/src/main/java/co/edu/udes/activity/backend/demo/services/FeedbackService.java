@@ -1,5 +1,18 @@
 package co.edu.udes.activity.backend.demo.services;
 
+
+import co.edu.udes.activity.backend.demo.models.Feedback;
+import co.edu.udes.activity.backend.demo.repository.FeedbackRepository;
+
+import co.edu.udes.activity.backend.demo.models.*;
+import co.edu.udes.activity.backend.demo.repositories.FeedbackRepository;
+import co.edu.udes.activity.backend.demo.repositories.AcademicRecordRepository;
+import co.edu.udes.activity.backend.demo.repositories.EvaluationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
 import co.edu.udes.activity.backend.demo.models.Feedback;
 import co.edu.udes.activity.backend.demo.repositories.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +27,19 @@ public class FeedbackService {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
+    @Autowired
+    private AcademicRecordRepository academicRecordRepository;
+
+    @Autowired
+    private EvaluationRepository evaluationRepository;  // Añadido para obtener evaluaciones
+
+
+ 
     public List<Feedback> getAllFeedbacks() {
         return feedbackRepository.findAll();
     }
 
+    public Optional<Feedback> getFeedbackById(int id) {
     public Optional<Feedback> getFeedbackById(long id) {
         return feedbackRepository.findById(id);
     }
@@ -26,7 +48,9 @@ public class FeedbackService {
         return feedbackRepository.save(feedback);
     }
 
+    public Feedback updateFeedback(int id, Feedback updatedFeedback) {
     public Feedback updateFeedback(long id, Feedback updatedFeedback) {
+ 
         return feedbackRepository.findById(id).map(feedback -> {
             feedback.setMessage(updatedFeedback.getMessage());
             feedback.setSentAt(updatedFeedback.getSentAt());
@@ -36,11 +60,45 @@ public class FeedbackService {
         }).orElse(null);
     }
 
+    public boolean deleteFeedback(int id) {
     public boolean deleteFeedback(long id) {
+ 
         if (feedbackRepository.existsById(id)) {
             feedbackRepository.deleteById(id);
             return true;
         }
         return false;
     }
+
+    public void sendFeedback(Student student, String message) {
+        List<AcademicRecord> records = academicRecordRepository.findByStudentId(student.getId());
+
+        if (!records.isEmpty()) {
+            AcademicRecord record = records.get(0);
+
+            Evaluation evaluation = getLatestEvaluationForGroup(record.getGroup());
+
+            if (evaluation != null) {
+                Teacher teacher = evaluation.getTeacher();
+
+                Feedback feedback = new Feedback();
+                feedback.setMessage(message);
+                feedback.setSentAt(new Date());
+                feedback.setEvaluation(evaluation);
+                feedback.setTeacher(teacher);
+
+                feedbackRepository.save(feedback);
+            } else {
+                throw new RuntimeException("No se encontró una evaluación para el grupo de este registro académico.");
+            }
+        } else {
+            throw new RuntimeException("No se encontró AcademicRecord para el estudiante con ID: " + student.getId());
+        }
+    }
+
+    private Evaluation getLatestEvaluationForGroup(Group group) {
+        List<Evaluation> evaluations = evaluationRepository.findByGroupId(group.getIdGroup());
+        return evaluations.isEmpty() ? null : evaluations.get(0);  // Ajustar si es necesario ordenar por fecha
+    }
+
 }

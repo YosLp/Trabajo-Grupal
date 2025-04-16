@@ -23,7 +23,9 @@ public class Student extends User {
     private String phoneNumber;
 
 
+    public Student() {
+    }
+
+
     public Student() {}
-
-
 }

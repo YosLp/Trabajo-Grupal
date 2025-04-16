@@ -1,10 +1,15 @@
+<<<<<<< Updated upstream
 package co.edu.udes.activity.backend.demo.controller;
+=======
+package co.edu.udes.activity.backend.demo.controllers;
+>>>>>>> Stashed changes
 
 import co.edu.udes.activity.backend.demo.models.Evaluation;
 import co.edu.udes.activity.backend.demo.services.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +31,20 @@ public class EvaluationController {
     }
 
     @PostMapping
-    public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
-        return evaluationService.saveEvaluation(evaluation);
+    public void createEvaluation(@RequestParam int type, @RequestParam int maxScore) {
+        evaluationService.createEvaluation(type, maxScore);
     }
 
-    @PutMapping("/{id}")
-    public Evaluation updateEvaluation(@PathVariable int id, @RequestBody Evaluation updatedEvaluation) {
-        return evaluationService.updateEvaluation(id, updatedEvaluation);
+    @PutMapping("/{id}/schedule")
+    public String scheduleEvaluation(@PathVariable int id, @RequestParam Date date) {
+        boolean scheduled = evaluationService.scheduleEvaluation(id, date);
+        return scheduled ? "Evaluación programada correctamente" : "No se encontró la evaluación con ID: " + id;
+    }
+
+    @PutMapping("/{id}/modify")
+    public String modifyEvaluation(@PathVariable int id, @RequestParam String details) {
+        evaluationService.modifyEvaluation(id, details);
+        return "Detalles de la evaluación actualizados";
     }
 
     @DeleteMapping("/{id}")

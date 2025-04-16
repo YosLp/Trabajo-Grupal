@@ -1,6 +1,7 @@
 package co.edu.udes.activity.backend.demo.controller;
 
 import co.edu.udes.activity.backend.demo.models.Feedback;
+import co.edu.udes.activity.backend.demo.models.Student;
 import co.edu.udes.activity.backend.demo.services.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,17 @@ public class FeedbackController {
         boolean deleted = feedbackService.deleteFeedback(id);
         return deleted ? "Retroalimentación eliminada correctamente" : "No se encontró la retroalimentación con ID: " + id;
     }
+
+    @PostMapping("/send")
+    public String sendFeedback(@RequestBody Student student, @RequestParam String message) {
+        try {
+            feedbackService.sendFeedback(student, message);
+            return "Retroalimentación enviada exitosamente.";
+        } catch (Exception e) {
+            return "Error al enviar retroalimentación: " + e.getMessage();
+        }
+    }
 }
+
+
     

@@ -14,6 +14,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+<<<<<<< Updated upstream
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
@@ -23,6 +24,9 @@ public class StudentService {
     }
 
     public Student saveStudent(Student student) {
+=======
+    public Student registerStudent(Student student) {
+>>>>>>> Stashed changes
         return studentRepository.save(student);
     }
 
@@ -33,7 +37,7 @@ public class StudentService {
             student.setRegistrationDate(updatedStudent.getRegistrationDate());
             student.setPhoneNumber(updatedStudent.getPhoneNumber());
             return studentRepository.save(student);
-        }).orElse(null);
+        }).orElse(null); // Retorna null si el estudiante no existe
     }
 
     public boolean deleteStudent(int id) {
@@ -42,5 +46,13 @@ public class StudentService {
             return true;
         }
         return false;
+    }
+
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    public Optional<Student> getStudentById(long id) {
+        return studentRepository.findById(id);
     }
 }

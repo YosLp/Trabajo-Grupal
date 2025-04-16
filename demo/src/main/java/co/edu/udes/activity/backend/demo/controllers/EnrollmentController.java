@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 package co.edu.udes.activity.backend.demo.controller;
+=======
+package co.edu.udes.activity.backend.demo.controllers;
+>>>>>>> Stashed changes
 
 import co.edu.udes.activity.backend.demo.models.Enrollment;
 import co.edu.udes.activity.backend.demo.services.EnrollmentService;
@@ -21,7 +25,7 @@ public class EnrollmentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Enrollment> getEnrollmentById(@PathVariable int id) {
+    public Optional<Enrollment> getEnrollmentById(@PathVariable Long id) {
         return enrollmentService.getEnrollmentById(id);
     }
 
@@ -31,12 +35,12 @@ public class EnrollmentController {
     }
 
     @PutMapping("/{id}")
-    public Enrollment updateEnrollment(@PathVariable int id, @RequestBody Enrollment updatedEnrollment) {
+    public Enrollment updateEnrollment(@PathVariable Long id, @RequestBody Enrollment updatedEnrollment) {
         return enrollmentService.updateEnrollment(id, updatedEnrollment);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteEnrollment(@PathVariable int id) {
+    public String deleteEnrollment(@PathVariable Long id) {
         boolean deleted = enrollmentService.deleteEnrollment(id);
         return deleted ? "Matrícula eliminada correctamente" : "No se encontró la matrícula con ID: " + id;
     }

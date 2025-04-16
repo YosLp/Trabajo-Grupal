@@ -22,10 +22,13 @@ public class Report {
     @Column(name = "content", length = 2000, nullable = false)
     private String content;
 
+<<<<<<< Updated upstream
     @ManyToOne
     @JoinColumn(name = "idSubject", nullable = false)
     private Subject subject;
 
+=======
+>>>>>>> Stashed changes
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)
     private Student student;
@@ -33,4 +36,9 @@ public class Report {
     @ManyToOne
     @JoinColumn(name = "idAcademicRecord", nullable = false)
     private AcademicRecord academicRecord;
+
+    public Report() {
+
+    }
 }
+

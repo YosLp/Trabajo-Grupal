@@ -26,3 +26,4 @@ public class Feedback {
     @JoinColumn(name = "idEvaluation", nullable = false)
     private Evaluation evaluation;
 }
+

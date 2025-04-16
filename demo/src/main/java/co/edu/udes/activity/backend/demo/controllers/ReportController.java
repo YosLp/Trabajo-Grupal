@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 package co.edu.udes.activity.backend.demo.controller;
+=======
+package co.edu.udes.activity.backend.demo.controllers;
+>>>>>>> Stashed changes
 
 import co.edu.udes.activity.backend.demo.models.Report;
 import co.edu.udes.activity.backend.demo.services.ReportService;
@@ -41,3 +45,4 @@ public class ReportController {
         return deleted ? "Reporte eliminado correctamente" : "No se encontró el reporte con ID: " + id;
     }
 }
+

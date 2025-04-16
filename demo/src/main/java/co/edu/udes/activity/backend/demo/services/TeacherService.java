@@ -22,7 +22,7 @@ public class TeacherService {
         return teacherRepository.findById(id);
     }
 
-    public Teacher saveTeacher(Teacher teacher) {
+    public Teacher registerTeacher(Teacher teacher) {
         return teacherRepository.save(teacher);
     }
 

@@ -5,6 +5,7 @@ import co.edu.udes.activity.backend.demo.repository.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,35 @@ public class EvaluationService {
 
     @Autowired
     private EvaluationRepository evaluationRepository;
+
+    public void createEvaluation(int type, int maxScore) {
+        Evaluation evaluation = new Evaluation();
+        evaluation.setType(type);
+        evaluation.setMaxScore(maxScore);
+        evaluationRepository.save(evaluation);
+    }
+
+    public void recordScores() {
+    }
+
+    public boolean scheduleEvaluation(int id, Date date) {
+        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
+        if (evaluation.isPresent()) {
+            Evaluation eval = evaluation.get();
+            eval.setEvaluationDate(date);
+            evaluationRepository.save(eval);
+            return true;
+        }
+        return false;
+    }
+
+    public void modifyEvaluation(int id, String details) {
+        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
+        if (evaluation.isPresent()) {
+            Evaluation eval = evaluation.get();
+            evaluationRepository.save(eval);
+        }
+    }
 
     public List<Evaluation> getAllEvaluations() {
         return evaluationRepository.findAll();

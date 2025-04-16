@@ -5,6 +5,7 @@ import co.edu.udes.activity.backend.demo.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,4 +46,21 @@ public class ReportService {
         }
         return false;
     }
+
+    public Report generateReport(String type) {
+        Report report = new Report();
+        report.setReportType(type);
+        report.setGenerationDate(new Date());
+        report.setContent("Contenido generado automáticamente para tipo: " + type);
+        return reportRepository.save(report);
+    }
+
+    public void exportToPDF() {
+        System.out.println("Exportando reporte a PDF...");
+    }
+
+    public void exportToExcel() {
+        System.out.println("Exportando reporte a Excel...");
+    }
 }
+

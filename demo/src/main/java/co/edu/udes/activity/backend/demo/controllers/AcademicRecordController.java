@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-package co.edu.udes.activity.backend.demo.controller;
-=======
+
 package co.edu.udes.activity.backend.demo.controllers;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
 import co.edu.udes.activity.backend.demo.services.AcademicRecordService;
@@ -29,6 +24,9 @@ public class AcademicRecordController {
 
     @GetMapping("/{id}")
     public Optional<AcademicRecord> getAcademicRecordById(@PathVariable int id) {
+
+    public Optional<AcademicRecord> getAcademicRecordById(@PathVariable long id) {
+
         return academicRecordService.getAcademicRecordById(id);
     }
 
@@ -39,6 +37,7 @@ public class AcademicRecordController {
 
     @PutMapping("/{id}")
     public AcademicRecord updateAcademicRecord(@PathVariable int id, @RequestBody AcademicRecord updatedAcademicRecord) {
+    public AcademicRecord updateAcademicRecord(@PathVariable long id, @RequestBody AcademicRecord updatedAcademicRecord) {
         return academicRecordService.updateAcademicRecord(id, updatedAcademicRecord);
     }
 
@@ -51,5 +50,10 @@ public class AcademicRecordController {
     @GetMapping("/student/{studentId}/history")
     public List<AcademicRecord> getAcademicHistoryByStudentId(@PathVariable Long studentId) {
         return academicRecordService.getAcademicHistoryByStudentId(studentId);
+    }
+
+    public String deleteAcademicRecord(@PathVariable long id) {
+        boolean deleted = academicRecordService.deleteAcademicRecord(id);
+        return deleted ? "Registro académico eliminado correctamente" : "No se encontró el registro académico con ID: " + id;
     }
 }

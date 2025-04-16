@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-package co.edu.udes.activity.backend.demo.controller;
-=======
 package co.edu.udes.activity.backend.demo.controllers;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
+ 
 
 import co.edu.udes.activity.backend.demo.models.Teacher;
 import co.edu.udes.activity.backend.demo.services.TeacherService;
@@ -35,6 +30,8 @@ public class TeacherController {
     @PostMapping
     public Teacher registerTeacher(@RequestBody Teacher teacher) {
         return teacherService.registerTeacher(teacher);
+    public Teacher createTeacher(@RequestBody Teacher teacher) {
+        return teacherService.saveTeacher(teacher);
     }
 
     @PutMapping("/{id}")

@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "Launch DemoApplication",
+        "request": "launch",
+        "mainClass": "co.edu.udes.activity.backend.demo.DemoApplication",
+        "projectName": "demo"
+      }
+    ]
+  }

@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-package co.edu.udes.activity.backend.demo.controller;
-=======
+
 package co.edu.udes.activity.backend.demo.controllers;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 import co.edu.udes.activity.backend.demo.models.Evaluation;
 import co.edu.udes.activity.backend.demo.services.EvaluationService;
@@ -48,6 +43,13 @@ public class EvaluationController {
     public String modifyEvaluation(@PathVariable int id, @RequestParam String details) {
         evaluationService.modifyEvaluation(id, details);
         return "Detalles de la evaluación actualizados";
+    public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
+        return evaluationService.saveEvaluation(evaluation);
+    }
+
+    @PutMapping("/{id}")
+    public Evaluation updateEvaluation(@PathVariable int id, @RequestBody Evaluation updatedEvaluation) {
+        return evaluationService.updateEvaluation(id, updatedEvaluation);
     }
 
     @DeleteMapping("/{id}")

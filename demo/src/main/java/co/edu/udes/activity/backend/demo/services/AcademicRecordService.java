@@ -2,6 +2,8 @@ package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
 import co.edu.udes.activity.backend.demo.repository.AcademicRecordRepository;
+
+import co.edu.udes.activity.backend.demo.repositories.AcademicRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,30 +20,23 @@ public class AcademicRecordService {
         return academicRecordRepository.findAll();
     }
 
-<<<<<<< Updated upstream
     public Optional<AcademicRecord> getAcademicRecordById(int id) {
-=======
     public Optional<AcademicRecord> getAcademicRecordById(long id) {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         return academicRecordRepository.findById(id);
+    public Optional<AcademicRecord> getAcademicRecordById(long id) {
+        return academicRecordRepository.findById((long) id);
     }
 
     public AcademicRecord saveAcademicRecord(AcademicRecord academicRecord) {
         return academicRecordRepository.save(academicRecord);
     }
 
-<<<<<<< Updated upstream
     public AcademicRecord updateAcademicRecord(int id, AcademicRecord updatedAcademicRecord) {
-=======
     public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         return academicRecordRepository.findById(id).map(academicRecord -> {
+
+    public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
+        return academicRecordRepository.findById( id).map(academicRecord -> {
             academicRecord.setAcademicHistory(updatedAcademicRecord.getAcademicHistory());
             academicRecord.setGroup(updatedAcademicRecord.getGroup());
             academicRecord.setStudent(updatedAcademicRecord.getStudent());
@@ -49,16 +44,13 @@ public class AcademicRecordService {
         }).orElse(null);
     }
 
-<<<<<<< Updated upstream
     public boolean deleteAcademicRecord(int id) {
-=======
     public boolean deleteAcademicRecord(long id) {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         if (academicRecordRepository.existsById(id)) {
             academicRecordRepository.deleteById(id);
+    public boolean deleteAcademicRecord(long id) {
+        if (academicRecordRepository.existsById( id)) {
+            academicRecordRepository.deleteById( id);
             return true;
         }
         return false;
@@ -70,3 +62,5 @@ public class AcademicRecordService {
     }
 }
 
+
+}

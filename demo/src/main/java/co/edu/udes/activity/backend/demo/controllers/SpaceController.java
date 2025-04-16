@@ -2,6 +2,8 @@ package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.models.Space;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import co.edu.udes.activity.backend.demo.services.SpaceService;
 
@@ -39,5 +41,19 @@ public class SpaceController {
     public String deleteSpace(@PathVariable Long id) {
         boolean deleted = spaceService.deleteSpace(id);
         return deleted ? "Espacio eliminado correctamente" : "No se encontró el espacio con ID: " + id;
+    }
+
+    @GetMapping("/availability/{id}")
+    public ResponseEntity<Boolean> checkAvailability(@PathVariable Long id) {
+        return ResponseEntity.ok(spaceService.checkAvailability(id));
+    }
+
+    @PutMapping("/availability/{id}")
+    public ResponseEntity<String> updateAvailability(@PathVariable Long id,
+                                                     @RequestParam boolean available) {
+        boolean updated = spaceService.updateAvailability(id, available);
+        return updated ?
+                ResponseEntity.ok("Disponibilidad actualizada") :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("Espacio no encontrado");
     }
 }

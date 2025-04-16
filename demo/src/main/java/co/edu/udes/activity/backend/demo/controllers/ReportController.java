@@ -1,11 +1,5 @@
-<<<<<<< Updated upstream
-package co.edu.udes.activity.backend.demo.controller;
-=======
 package co.edu.udes.activity.backend.demo.controllers;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 import co.edu.udes.activity.backend.demo.models.Report;
 import co.edu.udes.activity.backend.demo.services.ReportService;

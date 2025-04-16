@@ -1,4 +1,5 @@
-package co.edu.udes.activity.backend.demo.controller;
+package co.edu.udes.activity.backend.demo.controllers;
+
 
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.services.GroupService;

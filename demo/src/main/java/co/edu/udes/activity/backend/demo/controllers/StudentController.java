@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-package co.edu.udes.activity.backend.demo.controller;
-=======
+
 package co.edu.udes.activity.backend.demo.controllers;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 import co.edu.udes.activity.backend.demo.models.Student;
 import co.edu.udes.activity.backend.demo.services.StudentService;
@@ -51,5 +46,24 @@ public class StudentController {
         boolean deleted = studentService.deleteStudent(id);
         return deleted ? ResponseEntity.ok("Estudiante eliminado correctamente")
                 : ResponseEntity.notFound().build();
+
+    public Optional<Student> getStudentById(@PathVariable int id) {
+        return studentService.getStudentById(id);
+    }
+
+    @PostMapping
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student);
+    }
+
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable int id, @RequestBody Student updatedStudent) {
+        return studentService.updateStudent(id, updatedStudent);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        boolean deleted = studentService.deleteStudent(id);
+        return deleted ? "Estudiante eliminado correctamente" : "No se encontró el estudiante con ID: " + id;
     }
 }

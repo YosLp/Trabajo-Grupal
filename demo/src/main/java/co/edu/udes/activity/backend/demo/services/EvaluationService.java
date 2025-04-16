@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+
+import co.edu.udes.activity.backend.demo.repositories.EvaluationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +49,13 @@ public class EvaluationService {
         }
     }
 
+
     public List<Evaluation> getAllEvaluations() {
         return evaluationRepository.findAll();
     }
 
     public Optional<Evaluation> getEvaluationById(int id) {
+    public Optional<Evaluation> getEvaluationById(long id) {
         return evaluationRepository.findById(id);
     }
 
@@ -57,6 +64,7 @@ public class EvaluationService {
     }
 
     public Evaluation updateEvaluation(int id, Evaluation updatedEvaluation) {
+    public Evaluation updateEvaluation(long id, Evaluation updatedEvaluation) {
         return evaluationRepository.findById(id).map(evaluation -> {
             evaluation.setType(updatedEvaluation.getType());
             evaluation.setMaxScore(updatedEvaluation.getMaxScore());
@@ -68,6 +76,7 @@ public class EvaluationService {
     }
 
     public boolean deleteEvaluation(int id) {
+    public boolean deleteEvaluation(long id) {
         if (evaluationRepository.existsById(id)) {
             evaluationRepository.deleteById(id);
             return true;

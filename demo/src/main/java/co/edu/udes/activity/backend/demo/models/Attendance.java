@@ -2,7 +2,10 @@ package co.edu.udes.activity.backend.demo.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -18,5 +21,10 @@ public class Attendance {
 
         @Column(name = "status")
     private Boolean status;
+
+        @ManyToOne
+    @JoinColumn(name = "idSchedule", nullable = false)
+    private Schedule schedule;
+
 
 }

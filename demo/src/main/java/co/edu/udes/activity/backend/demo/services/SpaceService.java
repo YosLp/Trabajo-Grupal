@@ -12,7 +12,7 @@ import java.util.Optional;
 public class SpaceService {
 
     @Autowired
-    private SpaceRepository spaceRepository;
+    SpaceRepository spaceRepository;
 
     public List<Space> getAllSpaces() {
         return spaceRepository.findAll();
@@ -39,6 +39,23 @@ public class SpaceService {
     public boolean deleteSpace(Long id) {
         if (spaceRepository.existsById(id)) {
             spaceRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkAvailability(Long spaceId) {
+        return spaceRepository.findById(spaceId)
+                .map(Space::isAvailable)
+                .orElse(false);
+    }
+
+    public boolean updateAvailability(Long spaceId, boolean available) {
+        Optional<Space> spaceOpt = spaceRepository.findById(spaceId);
+        if (spaceOpt.isPresent()) {
+            Space space = spaceOpt.get();
+            space.setAvailable(available);
+            spaceRepository.save(space);
             return true;
         }
         return false;

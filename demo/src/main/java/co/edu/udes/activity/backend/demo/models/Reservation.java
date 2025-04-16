@@ -1,6 +1,8 @@
 package co.edu.udes.activity.backend.demo.models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,10 +16,10 @@ public class Reservation {
     private long id;
 
     @Column (name ="star_time")
-    private LocalDate starTime;
+    private LocalTime starTime;
 
     @Column(name="end_time")
-    private LocalDate endTime;
+    private LocalTime endTime;
 
     @Column (name="reservation_date")
     private LocalDate date;

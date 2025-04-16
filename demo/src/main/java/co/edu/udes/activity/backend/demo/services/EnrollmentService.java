@@ -1,20 +1,20 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Enrollment;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import co.edu.udes.activity.backend.demo.repository.EnrollmentRepository;
-=======
-=======
->>>>>>> Stashed changes
+
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.models.Student;
 import co.edu.udes.activity.backend.demo.repositories.EnrollmentRepository;
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+
+import co.edu.udes.activity.backend.demo.repositories.EnrollmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +28,10 @@ public class EnrollmentService {
         return enrollmentRepository.findAll();
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public Optional<Enrollment> getEnrollmentById(int id) {
-=======
     public Optional<Enrollment> getEnrollmentById(Long id) {
->>>>>>> Stashed changes
-=======
     public Optional<Enrollment> getEnrollmentById(Long id) {
->>>>>>> Stashed changes
+    public Optional<Enrollment> getEnrollmentById(long id) {
         return enrollmentRepository.findById(id);
     }
 
@@ -46,34 +41,31 @@ public class EnrollmentService {
         return enrollmentRepository.save(enrollment);
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public Enrollment updateEnrollment(int id, Enrollment updatedEnrollment) {
-=======
     public Enrollment updateEnrollment(Long id, Enrollment updatedEnrollment) {
->>>>>>> Stashed changes
-=======
     public Enrollment updateEnrollment(Long id, Enrollment updatedEnrollment) {
->>>>>>> Stashed changes
         return enrollmentRepository.findById(id).map(enrollment -> {
             enrollment.setStudent(updatedEnrollment.getStudent());
             enrollment.setGroup(updatedEnrollment.getGroup());
             enrollment.setEnrollmentDate(updatedEnrollment.getEnrollmentDate());
             enrollment.setStatus(updatedEnrollment.getStatus());
+        return enrollmentRepository.save(enrollment);
+    }
+
+    public Enrollment updateEnrollment(long id, Enrollment updatedEnrollment) {
+        return enrollmentRepository.findById(id).map(enrollment -> {
+            enrollment.setStudent(updatedEnrollment.getStudent());
+            enrollment.setGroup(updatedEnrollment.getGroup());
             return enrollmentRepository.save(enrollment);
         }).orElse(null);
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public boolean deleteEnrollment(int id) {
-=======
     public boolean deleteEnrollment(Long id) {
->>>>>>> Stashed changes
-=======
     public boolean deleteEnrollment(Long id) {
->>>>>>> Stashed changes
         if (enrollmentRepository.existsById(id)) {
+    public boolean deleteEnrollment(long id) {
+        if (enrollmentRepository.existsById( id)) {
             enrollmentRepository.deleteById(id);
             return true;
         }
@@ -101,3 +93,5 @@ public class EnrollmentService {
 }
 
 
+=======
+}

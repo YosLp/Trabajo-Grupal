@@ -1,7 +1,5 @@
 package co.edu.udes.activity.backend.demo.models;
 
-<<<<<<< Updated upstream
-=======
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -29,5 +27,5 @@ public class Student extends User {
     }
 
 
->>>>>>> Stashed changes
+    public Student() {}
 }

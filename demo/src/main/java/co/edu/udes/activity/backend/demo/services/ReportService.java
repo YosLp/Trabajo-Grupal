@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import co.edu.udes.activity.backend.demo.repositories.ReportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +24,8 @@ public class ReportService {
     }
 
     public Optional<Report> getReportById(int id) {
+
+    public Optional<Report> getReportById(long id) {
         return reportRepository.findById(id);
     }
 
@@ -28,6 +34,7 @@ public class ReportService {
     }
 
     public Report updateReport(int id, Report updatedReport) {
+    public Report updateReport(long id, Report updatedReport) {
         return reportRepository.findById(id).map(report -> {
             report.setReportType(updatedReport.getReportType());
             report.setGenerationDate(updatedReport.getGenerationDate());
@@ -40,6 +47,8 @@ public class ReportService {
     }
 
     public boolean deleteReport(int id) {
+
+    public boolean deleteReport(long id) {
         if (reportRepository.existsById(id)) {
             reportRepository.deleteById(id);
             return true;
@@ -64,3 +73,4 @@ public class ReportService {
     }
 }
 
+}

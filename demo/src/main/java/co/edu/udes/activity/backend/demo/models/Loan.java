@@ -21,14 +21,17 @@ public class Loan {
     private LocalDateTime returnDate;
 
     @ManyToOne
-    @JoinColumn(name ="student_id", nullable= false)
-    private Student student;
+    @JoinColumn(name ="User_id", nullable= false)
+    private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name ="loan_material",
     joinColumns = @JoinColumn(name ="loan_id"),
     inverseJoinColumns = @JoinColumn(name="material_id"))
     private Set<Material> materials;
+
+    @Column(name ="Status")
+    private String status;
 
     public Loan(){
 

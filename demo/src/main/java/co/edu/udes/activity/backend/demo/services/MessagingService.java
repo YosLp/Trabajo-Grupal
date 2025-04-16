@@ -1,15 +1,22 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Messaging;
+import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.repositories.MessagingRepository;
+import co.edu.udes.activity.backend.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
 public class MessagingService {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MessagingRepository messagingRepository;
@@ -44,5 +51,33 @@ public class MessagingService {
             return true;
         }
         return false;
+    }
+
+    public void sendMessage(Long idRecipient, Long idSender, String content, String messageType) {
+        Optional<User> recipient = userRepository.findById(idRecipient);
+        Optional<User> sender = userRepository.findById(idSender);
+
+        if (recipient.isPresent() && sender.isPresent()) {
+            Messaging message = new Messaging();
+            message.setSender(sender.get());
+            message.setReceiver(recipient.get());
+            message.setContent(content);
+            message.setSendDate(LocalDateTime.now());
+            message.setRead(false);
+            message.setMessageType(messageType);
+            messagingRepository.save(message);
+        }
+    }
+
+    public void markAsRead(Long messageId) {
+        Optional<Messaging> optionalMessage = messagingRepository.findById(messageId);
+        optionalMessage.ifPresent(message -> {
+            message.setRead(true);
+            messagingRepository.save(message);
+        });
+    }
+
+    public List<Messaging> getMessagesByUser(Long userId) {
+        return messagingRepository.findByReceiverId(userId);
     }
 }

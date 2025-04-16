@@ -1,9 +1,9 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
-
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,28 +17,33 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping
-    public List<Group> getAllGroups() {
-        return groupService.getAllGroups();
+    public ResponseEntity<List<Group>> getAllGroups() {
+        return ResponseEntity.ok(groupService.getAllGroups());
     }
 
     @GetMapping("/{id}")
-    public Optional<Group> getGroupById(@PathVariable int id) {
-        return groupService.getGroupById(id);
+    public ResponseEntity<Group> getGroupById(@PathVariable long id) {
+        Optional<Group> group = groupService.getGroupById(id);
+        return group.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Group createGroup(@RequestBody Group group) {
-        return groupService.saveGroup(group);
+    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
+        return ResponseEntity.ok(groupService.saveGroup(group));
     }
 
     @PutMapping("/{id}")
-    public Group updateGroup(@PathVariable int id, @RequestBody Group updatedGroup) {
-        return groupService.updateGroup(id, updatedGroup);
+    public ResponseEntity<Group> updateGroup(@PathVariable long id, @RequestBody Group updatedGroup) {
+        Group group = groupService.updateGroup(id, updatedGroup);
+        return group != null ? ResponseEntity.ok(group) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteGroup(@PathVariable int id) {
+    public ResponseEntity<String> deleteGroup(@PathVariable long id) {
         boolean deleted = groupService.deleteGroup(id);
-        return deleted ? "Grupo eliminado correctamente" : "No se encontró el grupo con ID: " + id;
+        return deleted
+                ? ResponseEntity.ok("Grupo eliminado correctamente")
+                : ResponseEntity.notFound().build();
     }
 }

@@ -1,17 +1,14 @@
 package co.edu.udes.activity.backend.demo.services;
 
-import co.edu.udes.activity.backend.demo.models.Report;
-import co.edu.udes.activity.backend.demo.repository.ReportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.Date;
-import co.edu.udes.activity.backend.demo.repositories.ReportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import co.edu.udes.activity.backend.demo.models.Report;
+import co.edu.udes.activity.backend.demo.repositories.ReportRepository;
 
 @Service
 public class ReportService {
@@ -23,9 +20,7 @@ public class ReportService {
         return reportRepository.findAll();
     }
 
-    public Optional<Report> getReportById(int id) {
-
-    public Optional<Report> getReportById(long id) {
+    public Optional<Report> getReportById(Long id) {
         return reportRepository.findById(id);
     }
 
@@ -33,8 +28,7 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
-    public Report updateReport(int id, Report updatedReport) {
-    public Report updateReport(long id, Report updatedReport) {
+    public Report updateReport(Long id, Report updatedReport) {
         return reportRepository.findById(id).map(report -> {
             report.setReportType(updatedReport.getReportType());
             report.setGenerationDate(updatedReport.getGenerationDate());
@@ -46,9 +40,7 @@ public class ReportService {
         }).orElse(null);
     }
 
-    public boolean deleteReport(int id) {
-
-    public boolean deleteReport(long id) {
+    public boolean deleteReport(Long id) {
         if (reportRepository.existsById(id)) {
             reportRepository.deleteById(id);
             return true;
@@ -73,4 +65,3 @@ public class ReportService {
     }
 }
 
-}

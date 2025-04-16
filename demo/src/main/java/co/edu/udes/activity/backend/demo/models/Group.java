@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Group")
+@Table(name = "groupofstudents")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

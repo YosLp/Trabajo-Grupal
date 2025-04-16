@@ -1,8 +1,6 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
-import co.edu.udes.activity.backend.demo.repository.AcademicRecordRepository;
-
 import co.edu.udes.activity.backend.demo.repositories.AcademicRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +11,27 @@ import java.util.Optional;
 @Service
 public class AcademicRecordService {
 
+    private final AcademicRecordRepository academicRecordRepository;
+
     @Autowired
-    private AcademicRecordRepository academicRecordRepository;
+    public AcademicRecordService(AcademicRecordRepository academicRecordRepository) {
+        this.academicRecordRepository = academicRecordRepository;
+    }
 
     public List<AcademicRecord> getAllAcademicRecords() {
         return academicRecordRepository.findAll();
     }
 
-    public Optional<AcademicRecord> getAcademicRecordById(int id) {
     public Optional<AcademicRecord> getAcademicRecordById(long id) {
         return academicRecordRepository.findById(id);
-    public Optional<AcademicRecord> getAcademicRecordById(long id) {
-        return academicRecordRepository.findById((long) id);
     }
 
     public AcademicRecord saveAcademicRecord(AcademicRecord academicRecord) {
         return academicRecordRepository.save(academicRecord);
     }
 
-    public AcademicRecord updateAcademicRecord(int id, AcademicRecord updatedAcademicRecord) {
     public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
         return academicRecordRepository.findById(id).map(academicRecord -> {
-
-    public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
-        return academicRecordRepository.findById( id).map(academicRecord -> {
             academicRecord.setAcademicHistory(updatedAcademicRecord.getAcademicHistory());
             academicRecord.setGroup(updatedAcademicRecord.getGroup());
             academicRecord.setStudent(updatedAcademicRecord.getStudent());
@@ -44,23 +39,15 @@ public class AcademicRecordService {
         }).orElse(null);
     }
 
-    public boolean deleteAcademicRecord(int id) {
     public boolean deleteAcademicRecord(long id) {
         if (academicRecordRepository.existsById(id)) {
             academicRecordRepository.deleteById(id);
-    public boolean deleteAcademicRecord(long id) {
-        if (academicRecordRepository.existsById( id)) {
-            academicRecordRepository.deleteById( id);
             return true;
         }
         return false;
     }
 
-
     public List<AcademicRecord> getAcademicHistoryByStudentId(Long studentId) {
         return academicRecordRepository.findByStudentId(studentId);
     }
-}
-
-
 }

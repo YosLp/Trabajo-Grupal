@@ -9,9 +9,10 @@ import java.util.Date;
 @Data
 @Table(name = "Evaluation")
 public class Evaluation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEvaluation;
+    private Long idEvaluation;
 
     @Column(name = "type", nullable = false)
     private int type;
@@ -32,4 +33,7 @@ public class Evaluation {
 
     @OneToMany(mappedBy = "evaluation")
     private List<Feedback> feedbacks;
+
+    public Evaluation() {
+    }
 }

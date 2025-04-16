@@ -4,7 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="" />
+    <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/005b9a50-b7be-4edd-846f-6d116f581c37.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/005b9a50-b7be-4edd-846f-6d116f581c37/storage_v2/_src_/schema/TrabajoGrupal.GJCCPw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/005b9a50-b7be-4edd-846f-6d116f581c37/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81539683-c64b-4b87-bed2-2793d8c2a420.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81539683-c64b-4b87-bed2-2793d8c2a420/storage_v2/_src_/schema/TrabajoGrupal.GJCCPw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81539683-c64b-4b87-bed2-2793d8c2a420/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EvaluationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EvaluationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Evaluation.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Evaluation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/repositories/EvaluationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/repositories/EvaluationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/repositories/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/repositories/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EvaluationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EvaluationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/AcademicRecordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/AcademicRecordController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/AuthenticationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/AuthenticationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/EnrollmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/EnrollmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/EvaluationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/EvaluationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/FeedbackController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/FeedbackController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/GroupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/GroupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/MessagingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/MessagingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/ReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/StudentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/TeacherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/TeacherController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Enrollment.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Enrollment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Evaluation.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Evaluation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Report.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/AcademicRecordRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/AcademicRecordRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/AuthenticationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/AuthenticationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/EnrollmentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/EnrollmentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/EvaluationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/EvaluationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/FeedbackRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/FeedbackRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/MessagingRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/MessagingRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/AcademicRecordService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/AcademicRecordService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/AuthenticationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/EnrollmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/EnrollmentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/EvaluationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/EvaluationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/FeedbackService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/FeedbackService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/GroupService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/GroupService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/MessagingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/MessagingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/NotificationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/NotificationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/ReportService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/ReportService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/StudentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-classes/co/edu/udes/activity/backend/demo/DemoApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-classes/co/edu/udes/activity/backend/demo/services/LoanServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-classes/co/edu/udes/activity/backend/demo/services/MaterialServiceTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,9 +86,10 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.DemoApplication.executor": "Debug",
+    "Spring Boot.DemoApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -77,6 +134,7 @@
       <workItem from="1744689335866" duration="5411000" />
       <workItem from="1744758611423" duration="17000" />
       <workItem from="1744764899528" duration="11023000" />
+      <workItem from="1744815530093" duration="3544000" />
     </task>
     <servers />
   </component>

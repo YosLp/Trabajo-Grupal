@@ -1,12 +1,11 @@
 package co.edu.udes.activity.backend.demo.models;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Student")
+@Table(name = "student")
 @PrimaryKeyJoinColumn(name = "idUser")
 public class Student extends User {
 
@@ -22,9 +21,6 @@ public class Student extends User {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-
     public Student() {
     }
-
-
 }

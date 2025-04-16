@@ -22,7 +22,7 @@ public class EvaluationController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Evaluation> getEvaluationById(@PathVariable int id) {
+    public Optional<Evaluation> getEvaluationById(@PathVariable Long id) {
         return evaluationService.getEvaluationById(id);
     }
 
@@ -37,24 +37,24 @@ public class EvaluationController {
     }
 
     @PutMapping("/{id}/schedule")
-    public String scheduleEvaluation(@PathVariable int id, @RequestParam Date date) {
+    public String scheduleEvaluation(@PathVariable Long id, @RequestParam Date date) {
         boolean scheduled = evaluationService.scheduleEvaluation(id, date);
         return scheduled ? "Evaluación programada correctamente" : "No se encontró la evaluación con ID: " + id;
     }
 
     @PutMapping("/{id}/modify")
-    public String modifyEvaluation(@PathVariable int id, @RequestParam String details) {
+    public String modifyEvaluation(@PathVariable Long id, @RequestParam String details) {
         evaluationService.modifyEvaluation(id, details);
         return "Detalles de la evaluación actualizados";
     }
 
     @PutMapping("/{id}")
-    public Evaluation updateEvaluation(@PathVariable int id, @RequestBody Evaluation updatedEvaluation) {
+    public Evaluation updateEvaluation(@PathVariable Long id, @RequestBody Evaluation updatedEvaluation) {
         return evaluationService.updateEvaluation(id, updatedEvaluation);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteEvaluation(@PathVariable int id) {
+    public String deleteEvaluation(@PathVariable Long id) {
         boolean deleted = evaluationService.deleteEvaluation(id);
         return deleted ? "Evaluación eliminada correctamente" : "No se encontró la evaluación con ID: " + id;
     }

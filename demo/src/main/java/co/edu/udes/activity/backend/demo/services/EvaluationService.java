@@ -1,16 +1,11 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Evaluation;
-import co.edu.udes.activity.backend.demo.repository.EvaluationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-
 import co.edu.udes.activity.backend.demo.repositories.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,13 +19,11 @@ public class EvaluationService {
         Evaluation evaluation = new Evaluation();
         evaluation.setType(type);
         evaluation.setMaxScore(maxScore);
+        evaluation.setEvaluationDate(new Date());
         evaluationRepository.save(evaluation);
     }
 
-    public void recordScores() {
-    }
-
-    public boolean scheduleEvaluation(int id, Date date) {
+    public boolean scheduleEvaluation(Long id, Date date) {
         Optional<Evaluation> evaluation = evaluationRepository.findById(id);
         if (evaluation.isPresent()) {
             Evaluation eval = evaluation.get();
@@ -41,7 +34,7 @@ public class EvaluationService {
         return false;
     }
 
-    public void modifyEvaluation(int id, String details) {
+    public void modifyEvaluation(Long id, String details) {
         Optional<Evaluation> evaluation = evaluationRepository.findById(id);
         if (evaluation.isPresent()) {
             Evaluation eval = evaluation.get();
@@ -49,13 +42,11 @@ public class EvaluationService {
         }
     }
 
-
     public List<Evaluation> getAllEvaluations() {
         return evaluationRepository.findAll();
     }
 
-    public Optional<Evaluation> getEvaluationById(int id) {
-    public Optional<Evaluation> getEvaluationById(long id) {
+    public Optional<Evaluation> getEvaluationById(Long id) {
         return evaluationRepository.findById(id);
     }
 
@@ -63,8 +54,7 @@ public class EvaluationService {
         return evaluationRepository.save(evaluation);
     }
 
-    public Evaluation updateEvaluation(int id, Evaluation updatedEvaluation) {
-    public Evaluation updateEvaluation(long id, Evaluation updatedEvaluation) {
+    public Evaluation updateEvaluation(Long id, Evaluation updatedEvaluation) {
         return evaluationRepository.findById(id).map(evaluation -> {
             evaluation.setType(updatedEvaluation.getType());
             evaluation.setMaxScore(updatedEvaluation.getMaxScore());
@@ -75,8 +65,7 @@ public class EvaluationService {
         }).orElse(null);
     }
 
-    public boolean deleteEvaluation(int id) {
-    public boolean deleteEvaluation(long id) {
+    public boolean deleteEvaluation(Long id) {
         if (evaluationRepository.existsById(id)) {
             evaluationRepository.deleteById(id);
             return true;

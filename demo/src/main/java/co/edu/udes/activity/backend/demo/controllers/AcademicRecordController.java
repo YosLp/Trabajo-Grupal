@@ -1,7 +1,6 @@
 
 package co.edu.udes.activity.backend.demo.controllers;
 
-
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
 import co.edu.udes.activity.backend.demo.services.AcademicRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,7 @@ public class AcademicRecordController {
     }
 
     @GetMapping("/{id}")
-    public Optional<AcademicRecord> getAcademicRecordById(@PathVariable int id) {
-
     public Optional<AcademicRecord> getAcademicRecordById(@PathVariable long id) {
-
         return academicRecordService.getAcademicRecordById(id);
     }
 
@@ -36,13 +32,12 @@ public class AcademicRecordController {
     }
 
     @PutMapping("/{id}")
-    public AcademicRecord updateAcademicRecord(@PathVariable int id, @RequestBody AcademicRecord updatedAcademicRecord) {
     public AcademicRecord updateAcademicRecord(@PathVariable long id, @RequestBody AcademicRecord updatedAcademicRecord) {
         return academicRecordService.updateAcademicRecord(id, updatedAcademicRecord);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAcademicRecord(@PathVariable int id) {
+    public String deleteAcademicRecord(@PathVariable long id) {
         boolean deleted = academicRecordService.deleteAcademicRecord(id);
         return deleted ? "Registro académico eliminado correctamente" : "No se encontró el registro académico con ID: " + id;
     }
@@ -51,9 +46,5 @@ public class AcademicRecordController {
     public List<AcademicRecord> getAcademicHistoryByStudentId(@PathVariable Long studentId) {
         return academicRecordService.getAcademicHistoryByStudentId(studentId);
     }
-
-    public String deleteAcademicRecord(@PathVariable long id) {
-        boolean deleted = academicRecordService.deleteAcademicRecord(id);
-        return deleted ? "Registro académico eliminado correctamente" : "No se encontró el registro académico con ID: " + id;
-    }
 }
+

@@ -21,7 +21,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Feedback> getFeedbackById(@PathVariable int id) {
+    public Optional<Feedback> getFeedbackById(@PathVariable Long id) {
         return feedbackService.getFeedbackById(id);
     }
 
@@ -31,14 +31,16 @@ public class FeedbackController {
     }
 
     @PutMapping("/{id}")
-    public Feedback updateFeedback(@PathVariable int id, @RequestBody Feedback updatedFeedback) {
+    public Feedback updateFeedback(@PathVariable Long id, @RequestBody Feedback updatedFeedback) {
         return feedbackService.updateFeedback(id, updatedFeedback);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteFeedback(@PathVariable int id) {
+    public String deleteFeedback(@PathVariable Long id) {
         boolean deleted = feedbackService.deleteFeedback(id);
-        return deleted ? "Retroalimentación eliminada correctamente" : "No se encontró la retroalimentación con ID: " + id;
+        return deleted ? "Retroalimentación eliminada correctamente" :
+                         "No se encontró la retroalimentación con ID: " + id;
     }
 }
+
     

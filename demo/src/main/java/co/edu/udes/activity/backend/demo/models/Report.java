@@ -23,10 +23,13 @@ public class Report {
     private String content;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     @ManyToOne
     @JoinColumn(name = "idSubject", nullable = false)
     private Subject subject;
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     @ManyToOne

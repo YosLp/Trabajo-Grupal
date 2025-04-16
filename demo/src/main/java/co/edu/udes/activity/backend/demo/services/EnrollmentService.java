@@ -2,8 +2,11 @@ package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.models.Enrollment;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import co.edu.udes.activity.backend.demo.repository.EnrollmentRepository;
 =======
+=======
+>>>>>>> Stashed changes
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.models.Student;
 import co.edu.udes.activity.backend.demo.repositories.EnrollmentRepository;
@@ -26,7 +29,11 @@ public class EnrollmentService {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Optional<Enrollment> getEnrollmentById(int id) {
+=======
+    public Optional<Enrollment> getEnrollmentById(Long id) {
+>>>>>>> Stashed changes
 =======
     public Optional<Enrollment> getEnrollmentById(Long id) {
 >>>>>>> Stashed changes
@@ -40,7 +47,11 @@ public class EnrollmentService {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Enrollment updateEnrollment(int id, Enrollment updatedEnrollment) {
+=======
+    public Enrollment updateEnrollment(Long id, Enrollment updatedEnrollment) {
+>>>>>>> Stashed changes
 =======
     public Enrollment updateEnrollment(Long id, Enrollment updatedEnrollment) {
 >>>>>>> Stashed changes
@@ -54,7 +65,11 @@ public class EnrollmentService {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public boolean deleteEnrollment(int id) {
+=======
+    public boolean deleteEnrollment(Long id) {
+>>>>>>> Stashed changes
 =======
     public boolean deleteEnrollment(Long id) {
 >>>>>>> Stashed changes

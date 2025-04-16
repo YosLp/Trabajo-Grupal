@@ -22,6 +22,9 @@ public class AcademicRecordService {
     public Optional<AcademicRecord> getAcademicRecordById(int id) {
 =======
     public Optional<AcademicRecord> getAcademicRecordById(long id) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         return academicRecordRepository.findById(id);
     }
@@ -34,6 +37,9 @@ public class AcademicRecordService {
     public AcademicRecord updateAcademicRecord(int id, AcademicRecord updatedAcademicRecord) {
 =======
     public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         return academicRecordRepository.findById(id).map(academicRecord -> {
             academicRecord.setAcademicHistory(updatedAcademicRecord.getAcademicHistory());
@@ -47,6 +53,9 @@ public class AcademicRecordService {
     public boolean deleteAcademicRecord(int id) {
 =======
     public boolean deleteAcademicRecord(long id) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         if (academicRecordRepository.existsById(id)) {
             academicRecordRepository.deleteById(id);

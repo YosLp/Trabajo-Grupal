@@ -1,6 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 package co.edu.udes.activity.backend.demo.controller;
 =======
+=======
+>>>>>>> Stashed changes
 package co.edu.udes.activity.backend.demo.controllers;
 >>>>>>> Stashed changes
 

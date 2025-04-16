@@ -15,6 +15,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
@@ -31,6 +32,13 @@ public class StudentService {
     }
 
     public Student updateStudent(int id, Student updatedStudent) {
+=======
+    public Student registerStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public Student updateStudent(long id, Student updatedStudent) {
+>>>>>>> Stashed changes
         return studentRepository.findById(id).map(student -> {
             student.setAddress(updatedStudent.getAddress());
             student.setStatusStudent(updatedStudent.getStatusStudent());
@@ -40,7 +48,11 @@ public class StudentService {
         }).orElse(null); // Retorna null si el estudiante no existe
     }
 
+<<<<<<< Updated upstream
     public boolean deleteStudent(int id) {
+=======
+    public boolean deleteStudent(long id) {
+>>>>>>> Stashed changes
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
             return true;

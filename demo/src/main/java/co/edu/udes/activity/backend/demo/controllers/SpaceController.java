@@ -1,5 +1,7 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.SpaceDTO;
+import co.edu.udes.activity.backend.demo.dto.SpaceRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Space;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,34 +15,38 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/spaces")
 public class SpaceController {
-    
+
     @Autowired
     private SpaceService spaceService;
 
     @GetMapping
-    public List<Space> getAllSpaces() {
+    public List<SpaceDTO> getAllSpaces() {
         return spaceService.getAllSpaces();
     }
 
     @GetMapping("/{id}")
-    public Optional<Space> getSpaceById(@PathVariable Long id) {
-        return spaceService.getSpaceById(id);
+    public ResponseEntity<SpaceDTO> getSpaceById(@PathVariable Long id) {
+        SpaceDTO dto = spaceService.getSpaceById(id);
+        return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Space createSpace(@RequestBody Space space) {
-        return spaceService.saveSpace(space);
+    public ResponseEntity<SpaceDTO> createSpace(@RequestBody SpaceRequestDTO dto) {
+        return ResponseEntity.ok(spaceService.saveSpace(dto));
     }
 
     @PutMapping("/{id}")
-    public Space updateSpace(@PathVariable Long id, @RequestBody Space updatedSpace) {
-        return spaceService.updateSpace(id, updatedSpace);
+    public ResponseEntity<SpaceDTO> updateSpace(@PathVariable Long id, @RequestBody SpaceRequestDTO dto) {
+        SpaceDTO updated = spaceService.updateSpace(id, dto);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteSpace(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSpace(@PathVariable Long id) {
         boolean deleted = spaceService.deleteSpace(id);
-        return deleted ? "Espacio eliminado correctamente" : "No se encontró el espacio con ID: " + id;
+        return deleted ?
+                ResponseEntity.ok("Espacio eliminado correctamente") :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el espacio con ID: " + id);
     }
 
     @GetMapping("/availability/{id}")

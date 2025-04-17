@@ -44,28 +44,23 @@ public class MaterialService {
     }
 
     public Material updateStatus(Long id, boolean status) {
-        Optional<Material> optional = materialRepository.findById(id);
-        if (optional.isPresent()) {
-            Material material = optional.get();
+        return materialRepository.findById(id).map(material -> {
             material.setAvailable(status);
             return materialRepository.save(material);
-        }
-        return null;
+        }).orElse(null);
     }
 
     public boolean checkAvailability(Long id) {
-        Optional<Material> optional = materialRepository.findById(id);
-        return optional.map(material -> material.getAmount() > 0).orElse(false);
+        return materialRepository.findById(id)
+                .map(material -> material.getAmount() > 0)
+                .orElse(false);
     }
 
     public Material increaseAmount(Long id, int amountToAdd) {
-        Optional<Material> optional = materialRepository.findById(id);
-        if (optional.isPresent()) {
-            Material material = optional.get();
+        return materialRepository.findById(id).map(material -> {
             material.setAmount(material.getAmount() + amountToAdd);
             return materialRepository.save(material);
-        }
-        return null;
+        }).orElse(null);
     }
-
 }
+

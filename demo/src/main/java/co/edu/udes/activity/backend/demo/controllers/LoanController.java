@@ -1,9 +1,12 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.LoanDTO;
+import co.edu.udes.activity.backend.demo.dto.LoanRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Loan;
 import co.edu.udes.activity.backend.demo.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -14,34 +17,39 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/loans")
 public class LoanController {
-    
+
     @Autowired
     private LoanService loanService;
 
     @GetMapping
-    public List<Loan> getAllLoans() {
+    public List<LoanDTO> getAllLoans() {
         return loanService.getAllLoans();
     }
 
     @GetMapping("/{id}")
-    public Optional<Loan> getLoanById(@PathVariable Long id) {
-        return loanService.getLoanById(id);
+    public ResponseEntity<LoanDTO> getLoanById(@PathVariable Long id) {
+        return loanService.getLoanById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Loan createLoan(@RequestBody Loan loan) {
-        return loanService.saveLoan(loan);
+    public ResponseEntity<LoanDTO> createLoan(@RequestBody LoanRequestDTO dto) {
+        LoanDTO created = loanService.saveLoan(dto);
+        return created != null ? ResponseEntity.ok(created) : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public Loan updateLoan(@PathVariable Long id, @RequestBody Loan updatedLoan) {
-        return loanService.updateLoan(id, updatedLoan);
+    public ResponseEntity<LoanDTO> updateLoan(@PathVariable Long id, @RequestBody LoanRequestDTO dto) {
+        LoanDTO updated = loanService.updateLoan(id, dto);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteLoan(@PathVariable Long id) {
-        boolean deleted = loanService.deleteLoan(id);
-        return deleted ? "Préstamo eliminado correctamente" : "No se encontró el préstamo con ID: " + id;
+    public ResponseEntity<String> deleteLoan(@PathVariable Long id) {
+        return loanService.deleteLoan(id)
+                ? ResponseEntity.ok("Préstamo eliminado correctamente")
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el préstamo con ID: " + id);
     }
 
     @PostMapping("/register")
@@ -62,8 +70,8 @@ public class LoanController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Loan>> getLoansByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<LoanDTO>> getLoansByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(loanService.getLoansByUser(userId));
     }
-
 }
+

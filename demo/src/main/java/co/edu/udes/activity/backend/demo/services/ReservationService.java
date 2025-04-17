@@ -1,11 +1,14 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.ReservationDTO;
+import co.edu.udes.activity.backend.demo.dto.ReservationRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Space;
 import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.repositories.ReservationRepository;
 import co.edu.udes.activity.backend.demo.models.Reservation;
 import co.edu.udes.activity.backend.demo.repositories.SpaceRepository;
 import co.edu.udes.activity.backend.demo.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,39 +16,58 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
+
     @Autowired
     private SpaceRepository spaceRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<ReservationDTO> getAllReservations() {
+        return reservationRepository.findAll()
+                .stream()
+                .map(reservation -> modelMapper.map(reservation, ReservationDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Reservation> getReservationById(Long id) {
-        return reservationRepository.findById(id);
+    public Optional<ReservationDTO> getReservationById(Long id) {
+        return reservationRepository.findById(id)
+                .map(reservation -> modelMapper.map(reservation, ReservationDTO.class));
     }
 
-    public Reservation saveReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
+    public ReservationDTO saveReservation(ReservationRequestDTO dto) {
+        Reservation reservation = new Reservation();
+        reservation.setStarTime(dto.getStarTime());
+        reservation.setEndTime(dto.getEndTime());
+        reservation.setDate(dto.getDate());
+        reservation.setStatus(true);
+        reservation.setSpace(dto.getSpace());
+
+        userRepository.findById(dto.getUserid()).ifPresent(reservation::setUser);
+
+        return modelMapper.map(reservationRepository.save(reservation), ReservationDTO.class);
     }
 
-    public Reservation updateReservation(Long id, Reservation updatedReservation) {
+    public ReservationDTO updateReservation(Long id, ReservationRequestDTO dto) {
         return reservationRepository.findById(id).map(reservation -> {
-            reservation.setStarTime(updatedReservation.getStarTime());
-            reservation.setEndTime(updatedReservation.getEndTime());
-            reservation.setDate(updatedReservation.getDate());
-            reservation.setStatus(updatedReservation.isStatus());
-            reservation.setUser(updatedReservation.getUser());
-            reservation.setSpace(updatedReservation.getSpace());
-            return reservationRepository.save(reservation);
+            reservation.setStarTime(dto.getStarTime());
+            reservation.setEndTime(dto.getEndTime());
+            reservation.setDate(dto.getDate());
+            reservation.setSpace(dto.getSpace());
+            reservation.setStatus(true);
+            userRepository.findById(dto.getUserid()).ifPresent(reservation::setUser);
+
+            return modelMapper.map(reservationRepository.save(reservation), ReservationDTO.class);
         }).orElse(null);
     }
 
@@ -57,7 +79,7 @@ public class ReservationService {
         return false;
     }
 
-    public Reservation makeReservation(Long userId, Long spaceId, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public ReservationDTO makeReservation(Long userId, Long spaceId, LocalDate date, LocalTime startTime, LocalTime endTime) {
         Optional<User> userOpt = userRepository.findById(userId);
         Optional<Space> spaceOpt = spaceRepository.findById(spaceId);
 
@@ -76,7 +98,7 @@ public class ReservationService {
             space.setAvailable(false);
             spaceRepository.save(space);
 
-            return reservationRepository.save(reservation);
+            return modelMapper.map(reservationRepository.save(reservation), ReservationDTO.class);
         }
         return null;
     }
@@ -93,7 +115,11 @@ public class ReservationService {
         }
         return false;
     }
-    public List<Reservation> getReservationsByUser(Long userId) {
-        return reservationRepository.findByUserId(userId);
+
+    public List<ReservationDTO> getReservationsByUser(Long userId) {
+        return reservationRepository.findByUserId(userId)
+                .stream()
+                .map(reservation -> modelMapper.map(reservation, ReservationDTO.class))
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,7 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.ReservationDTO;
+import co.edu.udes.activity.backend.demo.dto.ReservationRequestDTO;
 import co.edu.udes.activity.backend.demo.services.ReservationService;
 import co.edu.udes.activity.backend.demo.models.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,48 +17,51 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
-    
+
     @Autowired
     private ReservationService reservationService;
 
-
     @GetMapping("/all")
-    public List<Reservation> getAllReservations() {
+    public List<ReservationDTO> getAllReservations() {
         return reservationService.getAllReservations();
     }
 
     @GetMapping("/{id}")
-    public Optional<Reservation> getReservationById(@PathVariable Long id) {
-        return reservationService.getReservationById(id);
+    public ResponseEntity<ReservationDTO> getReservationById(@PathVariable Long id) {
+        return reservationService.getReservationById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Reservation createReservation(@RequestBody Reservation reservation) {
-        return reservationService.saveReservation(reservation);
+    public ReservationDTO createReservation(@RequestBody ReservationRequestDTO dto) {
+        return reservationService.saveReservation(dto);
     }
 
     @PutMapping("/{id}")
-    public Reservation updateReservation(@PathVariable Long id, @RequestBody Reservation updatedReservation) {
-        return reservationService.updateReservation(id, updatedReservation);
+    public ResponseEntity<ReservationDTO> updateReservation(@PathVariable Long id, @RequestBody ReservationRequestDTO dto) {
+        ReservationDTO updated = reservationService.updateReservation(id, dto);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteReservation(@PathVariable Long id) {
+    public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
         boolean deleted = reservationService.deleteReservation(id);
-        return deleted ? "Reservación eliminada correctamente" : "No se encontró la reservación con ID: " + id;
+        return deleted ? ResponseEntity.ok("Reservación eliminada correctamente") :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la reservación con ID: " + id);
     }
 
     @PostMapping("/make")
-    public ResponseEntity<Reservation> makeReservation(@RequestParam Long userId,
-                                                       @RequestParam Long spaceId,
-                                                       @RequestParam String date,
-                                                       @RequestParam String startTime,
-                                                       @RequestParam String endTime) {
+    public ResponseEntity<ReservationDTO> makeReservation(@RequestParam Long userId,
+                                                          @RequestParam Long spaceId,
+                                                          @RequestParam String date,
+                                                          @RequestParam String startTime,
+                                                          @RequestParam String endTime) {
         LocalDate localDate = LocalDate.parse(date);
         LocalTime localStart = LocalTime.parse(startTime);
         LocalTime localEnd = LocalTime.parse(endTime);
 
-        Reservation reservation = reservationService.makeReservation(userId, spaceId, localDate, localStart, localEnd);
+        ReservationDTO reservation = reservationService.makeReservation(userId, spaceId, localDate, localStart, localEnd);
         return reservation != null ?
                 ResponseEntity.ok(reservation) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -71,10 +76,7 @@ public class ReservationController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Reservation>> getByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<ReservationDTO>> getByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(reservationService.getReservationsByUser(userId));
     }
-
-
-
 }

@@ -1,5 +1,7 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.AuthenticationDTO;
+import co.edu.udes.activity.backend.demo.dto.AuthenticationRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Authentication;
 import co.edu.udes.activity.backend.demo.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,63 +31,62 @@ import co.edu.udes.activity.backend.demo.services.AuthenticationService;
 @RestController
 @RequestMapping("/api/authentications")
 public class AuthenticationController {
-    
+
     @Autowired
     private AuthenticationService authenticationService;
 
     @GetMapping
-    public List<Authentication> getAllAuthentications() {
+    public List<AuthenticationDTO> getAllAuthentications() {
         return authenticationService.getAllAuthentications();
     }
 
     @GetMapping("/{id}")
-    public Optional<Authentication> getAuthenticationById(@PathVariable Long id) {
-        return authenticationService.getAuthenticationById(id);
+    public ResponseEntity<AuthenticationDTO> getAuthenticationById(@PathVariable Long id) {
+        return authenticationService.getAuthenticationById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Authentication createAuthentication(@RequestBody Authentication authentication) {
-        return authenticationService.saveAuthentication(authentication);
+    public ResponseEntity<AuthenticationDTO> createAuthentication(@RequestBody AuthenticationRequestDTO requestDTO) {
+        AuthenticationDTO saved = authenticationService.saveAuthentication(requestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public Authentication updateAuthentication(@PathVariable Long id, @RequestBody Authentication updatedAuthentication) {
-        return authenticationService.updateAuthentication(id, updatedAuthentication);
+    public ResponseEntity<AuthenticationDTO> updateAuthentication(@PathVariable Long id, @RequestBody AuthenticationRequestDTO requestDTO) {
+        AuthenticationDTO updated = authenticationService.updateAuthentication(id, requestDTO);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAuthentication(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAuthentication(@PathVariable Long id) {
         boolean deleted = authenticationService.deleteAuthentication(id);
-        return deleted ? "Autenticación eliminada correctamente" : "No se encontró la autenticación con ID: " + id;
+        return deleted ? ResponseEntity.ok("Autenticación eliminada correctamente") :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la autenticación con ID: " + id);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Authentication> login(@RequestParam String email,
-                                                @RequestParam String password) {
+    public ResponseEntity<AuthenticationDTO> login(@RequestParam String email, @RequestParam String password) {
         try {
-            Authentication auth = authenticationService.login(email, password);
+            AuthenticationDTO auth = authenticationService.login(email, password);
             return ResponseEntity.ok(auth);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
     @PostMapping("/logout/{userId}")
-    public ResponseEntity<?> logout(@PathVariable Long userId) {
+    public ResponseEntity<String> logout(@PathVariable Long userId) {
         boolean result = authenticationService.logout(userId);
-        if (result) {
-            return ResponseEntity.ok("Sesión cerrada correctamente");
-        } else {
-            return ResponseEntity.badRequest().body("No se pudo cerrar la sesión");
-        }
+        return result ? ResponseEntity.ok("Sesión cerrada correctamente")
+                : ResponseEntity.badRequest().body("No se pudo cerrar la sesión");
     }
 
     @PostMapping("/recover-password")
     public ResponseEntity<String> recoverPassword(@RequestParam String email) {
         boolean result = authenticationService.recoverPassword(email);
-        if (result) {
-            return ResponseEntity.ok("Correo de recuperación enviado");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correo no encontrado");
+        return result ? ResponseEntity.ok("Correo de recuperación enviado")
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correo no encontrado");
     }
 }

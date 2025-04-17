@@ -2,7 +2,6 @@ package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.dto.LoanDTO;
 import co.edu.udes.activity.backend.demo.dto.LoanRequestDTO;
-import co.edu.udes.activity.backend.demo.models.Loan;
 import co.edu.udes.activity.backend.demo.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 
 @RestController

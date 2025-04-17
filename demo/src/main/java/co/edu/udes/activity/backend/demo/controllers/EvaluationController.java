@@ -1,13 +1,12 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.EvaluationDTO;
 import co.edu.udes.activity.backend.demo.models.Evaluation;
 import co.edu.udes.activity.backend.demo.services.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/evaluations")
@@ -17,40 +16,23 @@ public class EvaluationController {
     private EvaluationService evaluationService;
 
     @GetMapping
-    public List<Evaluation> getAllEvaluations() {
+    public List<EvaluationDTO> getAllEvaluations() {
         return evaluationService.getAllEvaluations();
     }
 
     @GetMapping("/{id}")
-    public Optional<Evaluation> getEvaluationById(@PathVariable Long id) {
+    public EvaluationDTO getEvaluationById(@PathVariable Long id) {
         return evaluationService.getEvaluationById(id);
     }
 
     @PostMapping
-    public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
-        return evaluationService.saveEvaluation(evaluation);
-    }
-
-    @PostMapping("/custom")
-    public void createCustomEvaluation(@RequestParam int type, @RequestParam int maxScore) {
-        evaluationService.createEvaluation(type, maxScore);
-    }
-
-    @PutMapping("/{id}/schedule")
-    public String scheduleEvaluation(@PathVariable Long id, @RequestParam Date date) {
-        boolean scheduled = evaluationService.scheduleEvaluation(id, date);
-        return scheduled ? "Evaluación programada correctamente" : "No se encontró la evaluación con ID: " + id;
-    }
-
-    @PutMapping("/{id}/modify")
-    public String modifyEvaluation(@PathVariable Long id, @RequestParam String details) {
-        evaluationService.modifyEvaluation(id, details);
-        return "Detalles de la evaluación actualizados";
+    public Evaluation createEvaluation(@RequestBody EvaluationDTO evaluationDTO) {
+        return evaluationService.saveEvaluation(evaluationDTO);
     }
 
     @PutMapping("/{id}")
-    public Evaluation updateEvaluation(@PathVariable Long id, @RequestBody Evaluation updatedEvaluation) {
-        return evaluationService.updateEvaluation(id, updatedEvaluation);
+    public Evaluation updateEvaluation(@PathVariable Long id, @RequestBody EvaluationDTO updatedEvaluationDTO) {
+        return evaluationService.updateEvaluation(id, updatedEvaluationDTO);
     }
 
     @DeleteMapping("/{id}")

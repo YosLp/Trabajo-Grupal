@@ -5,21 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/AuthenticationRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/LoanRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/MessagingRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/NotificationRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/PermissionRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/RoleRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/AuthenticationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/AuthenticationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/LoanDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/LoanDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/MessagingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/MessagingDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/NotificationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/NotificationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/PermissionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/PermissionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/RoleDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EnrollmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EnrollmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EvaluationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/EvaluationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/GroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/EnrollmentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/EnrollmentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/EvaluationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/EvaluationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/GroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/GroupDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/AcademicRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/AcademicRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Enrollment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EnrollmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EnrollmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EvaluationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/EvaluationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/GroupService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +101,7 @@
       <workItem from="1744764899528" duration="11023000" />
       <workItem from="1744815530093" duration="3544000" />
       <workItem from="1744846791542" duration="2330000" />
+      <workItem from="1744852848621" duration="3513000" />
     </task>
     <servers />
   </component>

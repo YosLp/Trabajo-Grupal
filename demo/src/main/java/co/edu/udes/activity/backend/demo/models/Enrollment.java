@@ -28,4 +28,8 @@ public class Enrollment {
 
     @Column(name = "status", nullable = false)
     private String status;
+
+    public Enrollment() {
+
+    }
 }

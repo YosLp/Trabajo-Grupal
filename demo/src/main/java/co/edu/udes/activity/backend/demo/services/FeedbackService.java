@@ -1,15 +1,15 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.FeedbackDTO;
 import co.edu.udes.activity.backend.demo.models.*;
-import co.edu.udes.activity.backend.demo.repositories.FeedbackRepository;
-import co.edu.udes.activity.backend.demo.repositories.AcademicRecordRepository;
-import co.edu.udes.activity.backend.demo.repositories.EvaluationRepository;
+import co.edu.udes.activity.backend.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FeedbackService {
@@ -23,25 +23,32 @@ public class FeedbackService {
     @Autowired
     private EvaluationRepository evaluationRepository;
 
-    public List<Feedback> getAllFeedbacks() {
-        return feedbackRepository.findAll();
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    public List<FeedbackDTO> getAllFeedbacks() {
+        return feedbackRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    public Optional<Feedback> getFeedbackById(Long id) {
-        return feedbackRepository.findById(id);
+    public Optional<FeedbackDTO> getFeedbackById(Long id) {
+        return feedbackRepository.findById(id).map(this::convertToDTO);
     }
 
-    public Feedback saveFeedback(Feedback feedback) {
-        return feedbackRepository.save(feedback);
+    public FeedbackDTO saveFeedback(FeedbackDTO dto) {
+        Feedback feedback = convertToEntity(dto);
+        feedback.setSentAt(new Date());
+        return convertToDTO(feedbackRepository.save(feedback));
     }
 
-    public Feedback updateFeedback(Long id, Feedback updatedFeedback) {
+    public FeedbackDTO updateFeedback(Long id, FeedbackDTO dto) {
         return feedbackRepository.findById(id).map(feedback -> {
-            feedback.setMessage(updatedFeedback.getMessage());
-            feedback.setSentAt(updatedFeedback.getSentAt());
-            feedback.setTeacher(updatedFeedback.getTeacher());
-            feedback.setEvaluation(updatedFeedback.getEvaluation());
-            return feedbackRepository.save(feedback);
+            feedback.setMessage(dto.getMessage());
+            feedback.setSentAt(dto.getSentAt());
+
+            teacherRepository.findById(dto.getTeacherId()).ifPresent(feedback::setTeacher);
+            evaluationRepository.findById(dto.getEvaluationId()).ifPresent(feedback::setEvaluation);
+
+            return convertToDTO(feedbackRepository.save(feedback));
         }).orElse(null);
     }
 
@@ -58,7 +65,6 @@ public class FeedbackService {
 
         if (!records.isEmpty()) {
             AcademicRecord record = records.get(0);
-
             Evaluation evaluation = getLatestEvaluationForGroup(record.getGroup());
 
             if (evaluation != null) {
@@ -81,6 +87,28 @@ public class FeedbackService {
 
     private Evaluation getLatestEvaluationForGroup(Group group) {
         List<Evaluation> evaluations = evaluationRepository.findByGroupId(group.getIdGroup());
-        return evaluations.isEmpty() ? null : evaluations.get(0);  // Se podría mejorar con ordenamiento por fecha
+        return evaluations.isEmpty() ? null : evaluations.get(0);
+    }
+
+    private FeedbackDTO convertToDTO(Feedback feedback) {
+        FeedbackDTO dto = new FeedbackDTO();
+        dto.setIdFeedback(feedback.getIdFeedback());
+        dto.setMessage(feedback.getMessage());
+        dto.setSentAt(feedback.getSentAt());
+        dto.setTeacherId(feedback.getTeacher().getId());
+        dto.setEvaluationId(feedback.getEvaluation().getIdEvaluation());
+        return dto;
+    }
+
+    private Feedback convertToEntity(FeedbackDTO dto) {
+        Feedback feedback = new Feedback();
+        feedback.setIdFeedback(dto.getIdFeedback());
+        feedback.setMessage(dto.getMessage());
+        feedback.setSentAt(dto.getSentAt());
+
+        teacherRepository.findById(dto.getTeacherId()).ifPresent(feedback::setTeacher);
+        evaluationRepository.findById(dto.getEvaluationId()).ifPresent(feedback::setEvaluation);
+
+        return feedback;
     }
 }

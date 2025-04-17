@@ -28,19 +28,15 @@ public class AcademicRecordController {
 
     @PostMapping
     public AcademicRecord createAcademicRecord(@RequestBody AcademicRecordDTO academicRecordDTO) {
-        // Mapeo del DTO al modelo antes de guardarlo
         AcademicRecord academicRecord = new AcademicRecord();
         academicRecord.setAcademicHistory(academicRecordDTO.getAcademicHistory());
-        // Aquí se debe agregar el mapeo para las entidades Group y Student
         return academicRecordService.saveAcademicRecord(academicRecord);
     }
 
     @PutMapping("/{id}")
     public AcademicRecord updateAcademicRecord(@PathVariable long id, @RequestBody AcademicRecordDTO updatedAcademicRecordDTO) {
-        // Mapeo del DTO al modelo antes de actualizarlo
         AcademicRecord updatedAcademicRecord = new AcademicRecord();
         updatedAcademicRecord.setAcademicHistory(updatedAcademicRecordDTO.getAcademicHistory());
-        // Aquí se debe agregar el mapeo para las entidades Group y Student
         return academicRecordService.updateAcademicRecord(id, updatedAcademicRecord);
     }
 

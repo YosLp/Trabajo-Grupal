@@ -1,12 +1,12 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
-import co.edu.udes.activity.backend.demo.models.Feedback;
+import co.edu.udes.activity.backend.demo.dto.FeedbackDTO;
 import co.edu.udes.activity.backend.demo.services.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/feedbacks")
@@ -16,31 +16,32 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @GetMapping
-    public List<Feedback> getAllFeedbacks() {
-        return feedbackService.getAllFeedbacks();
+    public ResponseEntity<List<FeedbackDTO>> getAllFeedbacks() {
+        return ResponseEntity.ok(feedbackService.getAllFeedbacks());
     }
 
     @GetMapping("/{id}")
-    public Optional<Feedback> getFeedbackById(@PathVariable Long id) {
-        return feedbackService.getFeedbackById(id);
+    public ResponseEntity<FeedbackDTO> getFeedbackById(@PathVariable Long id) {
+        return feedbackService.getFeedbackById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Feedback createFeedback(@RequestBody Feedback feedback) {
-        return feedbackService.saveFeedback(feedback);
+    public ResponseEntity<FeedbackDTO> createFeedback(@RequestBody FeedbackDTO feedbackDTO) {
+        return ResponseEntity.ok(feedbackService.saveFeedback(feedbackDTO));
     }
 
     @PutMapping("/{id}")
-    public Feedback updateFeedback(@PathVariable Long id, @RequestBody Feedback updatedFeedback) {
-        return feedbackService.updateFeedback(id, updatedFeedback);
+    public ResponseEntity<FeedbackDTO> updateFeedback(@PathVariable Long id, @RequestBody FeedbackDTO feedbackDTO) {
+        FeedbackDTO updated = feedbackService.updateFeedback(id, feedbackDTO);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteFeedback(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFeedback(@PathVariable Long id) {
         boolean deleted = feedbackService.deleteFeedback(id);
-        return deleted ? "Retroalimentación eliminada correctamente" :
-                         "No se encontró la retroalimentación con ID: " + id;
+        return deleted ? ResponseEntity.ok("Retroalimentación eliminada correctamente") :
+                ResponseEntity.notFound().build();
     }
 }
-
-    

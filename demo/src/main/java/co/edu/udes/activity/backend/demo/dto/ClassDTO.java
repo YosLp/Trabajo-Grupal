@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 
-
+@Data
 public class ClassDTO {
 
     private Integer idClass;

@@ -25,5 +25,9 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "idEvaluation", nullable = false)
     private Evaluation evaluation;
+
+    public Feedback() {
+
+    }
 }
 

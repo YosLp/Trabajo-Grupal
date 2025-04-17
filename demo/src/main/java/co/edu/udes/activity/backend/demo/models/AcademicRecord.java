@@ -21,4 +21,8 @@ public class AcademicRecord {
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)
     private Student student;
+
+    public AcademicRecord() {
+
+    }
 }

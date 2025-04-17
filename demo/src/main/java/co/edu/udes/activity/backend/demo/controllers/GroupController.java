@@ -1,5 +1,6 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.GroupDTO;
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,33 +18,52 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping
-    public ResponseEntity<List<Group>> getAllGroups() {
+    public ResponseEntity<List<GroupDTO>> getAllGroups() {
         return ResponseEntity.ok(groupService.getAllGroups());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Group> getGroupById(@PathVariable long id) {
-        Optional<Group> group = groupService.getGroupById(id);
+    public ResponseEntity<GroupDTO> getGroupById(@PathVariable Long id) {
+        Optional<GroupDTO> group = groupService.getGroupById(id);
         return group.map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Group> createGroup(@RequestBody Group group) {
+    public ResponseEntity<GroupDTO> createGroup(@RequestBody Group group) {
         return ResponseEntity.ok(groupService.saveGroup(group));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Group> updateGroup(@PathVariable long id, @RequestBody Group updatedGroup) {
-        Group group = groupService.updateGroup(id, updatedGroup);
+    public ResponseEntity<GroupDTO> updateGroup(@PathVariable Long id, @RequestBody Group updatedGroup) {
+        GroupDTO group = groupService.updateGroup(id, updatedGroup);
         return group != null ? ResponseEntity.ok(group) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteGroup(@PathVariable long id) {
+    public ResponseEntity<String> deleteGroup(@PathVariable Long id) {
         boolean deleted = groupService.deleteGroup(id);
         return deleted
                 ? ResponseEntity.ok("Grupo eliminado correctamente")
                 : ResponseEntity.notFound().build();
+    }
+
+
+    @PutMapping("/{groupId}/assign")
+    public ResponseEntity<String> assignCourse(@PathVariable int groupId,
+                                               @RequestParam int teacherId,
+                                               @RequestParam int courseId) {
+        boolean assigned = groupService.assignCourse(groupId, teacherId, courseId);
+        return assigned
+                ? ResponseEntity.ok("Curso y profesor asignados al grupo correctamente")
+                : ResponseEntity.badRequest().body("No se pudo asignar curso o profesor al grupo");
+    }
+
+    @PutMapping("/{groupId}/unassign")
+    public ResponseEntity<String> unassignCourse(@PathVariable int groupId) {
+        boolean unassigned = groupService.unassignCourse(groupId);
+        return unassigned
+                ? ResponseEntity.ok("Curso y profesor desasignados del grupo correctamente")
+                : ResponseEntity.badRequest().body("No se pudo desasignar curso o profesor del grupo");
     }
 }

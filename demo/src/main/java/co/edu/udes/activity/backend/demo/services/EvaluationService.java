@@ -1,6 +1,9 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.EvaluationDTO;
 import co.edu.udes.activity.backend.demo.models.Evaluation;
+import co.edu.udes.activity.backend.demo.models.Group;
+import co.edu.udes.activity.backend.demo.models.Teacher;
 import co.edu.udes.activity.backend.demo.repositories.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EvaluationService {
@@ -15,54 +19,86 @@ public class EvaluationService {
     @Autowired
     private EvaluationRepository evaluationRepository;
 
-    public void createEvaluation(int type, int maxScore) {
+    public Evaluation saveEvaluation(EvaluationDTO evaluationDTO) {
+        Teacher teacher = new Teacher();
+        teacher.setId(evaluationDTO.getTeacherId());
+
+        Group group = new Group();
+        group.setIdGroup(Math.toIntExact(evaluationDTO.getGroupId()));
+
         Evaluation evaluation = new Evaluation();
-        evaluation.setType(type);
-        evaluation.setMaxScore(maxScore);
+        evaluation.setType(evaluationDTO.getType());
+        evaluation.setMaxScore(evaluationDTO.getMaxScore());
         evaluation.setEvaluationDate(new Date());
-        evaluationRepository.save(evaluation);
-    }
-
-    public boolean scheduleEvaluation(Long id, Date date) {
-        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
-        if (evaluation.isPresent()) {
-            Evaluation eval = evaluation.get();
-            eval.setEvaluationDate(date);
-            evaluationRepository.save(eval);
-            return true;
-        }
-        return false;
-    }
-
-    public void modifyEvaluation(Long id, String details) {
-        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
-        if (evaluation.isPresent()) {
-            Evaluation eval = evaluation.get();
-            evaluationRepository.save(eval);
-        }
-    }
-
-    public List<Evaluation> getAllEvaluations() {
-        return evaluationRepository.findAll();
-    }
-
-    public Optional<Evaluation> getEvaluationById(Long id) {
-        return evaluationRepository.findById(id);
-    }
-
-    public Evaluation saveEvaluation(Evaluation evaluation) {
+        evaluation.setTeacher(teacher);
+        evaluation.setGroup(group);
         return evaluationRepository.save(evaluation);
     }
 
-    public Evaluation updateEvaluation(Long id, Evaluation updatedEvaluation) {
-        return evaluationRepository.findById(id).map(evaluation -> {
-            evaluation.setType(updatedEvaluation.getType());
-            evaluation.setMaxScore(updatedEvaluation.getMaxScore());
-            evaluation.setEvaluationDate(updatedEvaluation.getEvaluationDate());
-            evaluation.setTeacher(updatedEvaluation.getTeacher());
-            evaluation.setGroup(updatedEvaluation.getGroup());
-            return evaluationRepository.save(evaluation);
-        }).orElse(null);
+    public List<EvaluationDTO> getAllEvaluations() {
+        return evaluationRepository.findAll().stream()
+                .map(evaluation -> {
+                    EvaluationDTO dto = new EvaluationDTO();
+                    dto.setIdEvaluation(evaluation.getIdEvaluation());
+                    dto.setType(evaluation.getType());
+                    dto.setMaxScore(evaluation.getMaxScore());
+                    dto.setEvaluationDate(evaluation.getEvaluationDate());
+
+                    if (evaluation.getTeacher() != null) {
+                        dto.setTeacherId(evaluation.getTeacher().getId());
+                    }
+
+                    if (evaluation.getGroup() != null) {
+                        dto.setGroupId((long) evaluation.getGroup().getIdGroup());
+                    }
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public EvaluationDTO getEvaluationById(Long id) {
+        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
+        if (evaluation.isPresent()) {
+            Evaluation eval = evaluation.get();
+            EvaluationDTO dto = new EvaluationDTO();
+            dto.setIdEvaluation(eval.getIdEvaluation());
+            dto.setType(eval.getType());
+            dto.setMaxScore(eval.getMaxScore());
+            dto.setEvaluationDate(eval.getEvaluationDate());
+
+            if (eval.getTeacher() != null) {
+                dto.setTeacherId(eval.getTeacher().getId());
+            }
+
+            if (eval.getGroup() != null) {
+                dto.setGroupId((long) eval.getGroup().getIdGroup());
+            }
+
+            return dto;
+        }
+        return null;
+    }
+
+    public Evaluation updateEvaluation(Long id, EvaluationDTO updatedEvaluationDTO) {
+        Optional<Evaluation> evaluation = evaluationRepository.findById(id);
+        if (evaluation.isPresent()) {
+            Evaluation eval = evaluation.get();
+            eval.setType(updatedEvaluationDTO.getType());
+            eval.setMaxScore(updatedEvaluationDTO.getMaxScore());
+            eval.setEvaluationDate(updatedEvaluationDTO.getEvaluationDate());
+
+            Teacher teacher = new Teacher();
+            teacher.setId(updatedEvaluationDTO.getTeacherId());
+            eval.setTeacher(teacher);
+
+            Group group = new Group();
+            group.setIdGroup(Math.toIntExact(updatedEvaluationDTO.getGroupId()));
+            eval.setGroup(group);
+
+            return evaluationRepository.save(eval);
+        }
+        return null;
     }
 
     public boolean deleteEvaluation(Long id) {

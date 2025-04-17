@@ -1,38 +1,51 @@
 package co.edu.udes.activity.backend.demo.services;
 
 
+import co.edu.udes.activity.backend.demo.dto.SpaceDTO;
+import co.edu.udes.activity.backend.demo.dto.SpaceRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Space;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.udes.activity.backend.demo.repositories.SpaceRepository;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Service
+
 public class SpaceService {
 
     @Autowired
-    SpaceRepository spaceRepository;
+    private SpaceRepository spaceRepository;
 
-    public List<Space> getAllSpaces() {
-        return spaceRepository.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<SpaceDTO> getAllSpaces() {
+        return spaceRepository.findAll().stream()
+                .map(space -> modelMapper.map(space, SpaceDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Space> getSpaceById(Long id) {
-        return spaceRepository.findById(id);
+    public SpaceDTO getSpaceById(Long id) {
+        return spaceRepository.findById(id)
+                .map(space -> modelMapper.map(space, SpaceDTO.class))
+                .orElse(null);
     }
 
-    public Space saveSpace(Space space) {
-        return spaceRepository.save(space);
+    public SpaceDTO saveSpace(SpaceRequestDTO spaceRequestDTO) {
+        Space space = modelMapper.map(spaceRequestDTO, Space.class);
+        return modelMapper.map(spaceRepository.save(space), SpaceDTO.class);
     }
 
-    public Space updateSpace(Long id, Space updatedSpace) {
+    public SpaceDTO updateSpace(Long id, SpaceRequestDTO updatedDTO) {
         return spaceRepository.findById(id).map(space -> {
-            space.setName(updatedSpace.getName());
-            space.setType(updatedSpace.getType());
-            space.setCapacity(updatedSpace.getCapacity());
-            space.setAvailable(updatedSpace.isAvailable());
-            return spaceRepository.save(space);
+            space.setName(updatedDTO.getName());
+            space.setType(updatedDTO.getType());
+            space.setCapacity(updatedDTO.getCapacity());
+            space.setAvailable(updatedDTO.isAvailable());
+            return modelMapper.map(spaceRepository.save(space), SpaceDTO.class);
         }).orElse(null);
     }
 
@@ -51,13 +64,10 @@ public class SpaceService {
     }
 
     public boolean updateAvailability(Long spaceId, boolean available) {
-        Optional<Space> spaceOpt = spaceRepository.findById(spaceId);
-        if (spaceOpt.isPresent()) {
-            Space space = spaceOpt.get();
+        return spaceRepository.findById(spaceId).map(space -> {
             space.setAvailable(available);
             spaceRepository.save(space);
             return true;
-        }
-        return false;
+        }).orElse(false);
     }
 }

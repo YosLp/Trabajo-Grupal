@@ -1,40 +1,52 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.PermissionDTO;
+import co.edu.udes.activity.backend.demo.dto.PermissionRequestDTO;
 import co.edu.udes.activity.backend.demo.repositories.PermissionRepository;
 import co.edu.udes.activity.backend.demo.models.Permission;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.repositories.UserRepository;
-
 @Service
 public class PermissionService {
 
     @Autowired
-    PermissionRepository permissionRepository;
+    private PermissionRepository permissionRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    public List<Permission> getAllPermissions() {
-        return permissionRepository.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<PermissionDTO> getAllPermissions() {
+        return permissionRepository.findAll().stream()
+                .map(permission -> modelMapper.map(permission, PermissionDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Permission> getPermissionById(Long id) {
-        return permissionRepository.findById(id);
+    public PermissionDTO getPermissionById(Long id) {
+        return permissionRepository.findById(id)
+                .map(permission -> modelMapper.map(permission, PermissionDTO.class))
+                .orElse(null);
     }
 
-    public Permission savePermission(Permission permission) {
-        return permissionRepository.save(permission);
+    public PermissionDTO savePermission(PermissionRequestDTO permissionRequestDTO) {
+        Permission permission = modelMapper.map(permissionRequestDTO, Permission.class);
+        return modelMapper.map(permissionRepository.save(permission), PermissionDTO.class);
     }
 
-    public Permission updatePermission(Long id, Permission updatedPermission) {
+    public PermissionDTO updatePermission(Long id, PermissionRequestDTO updatedDTO) {
         return permissionRepository.findById(id).map(permission -> {
-            permission.setName(updatedPermission.getName());
-            permission.setDescription(updatedPermission.getDescription());
-            return permissionRepository.save(permission);
+            permission.setName(updatedDTO.getName());
+            permission.setDescription(updatedDTO.getDescription());
+            return modelMapper.map(permissionRepository.save(permission), PermissionDTO.class);
         }).orElse(null);
     }
 
@@ -71,5 +83,4 @@ public class PermissionService {
         }
         return false;
     }
-
 }

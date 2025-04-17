@@ -1,57 +1,65 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.RoleDTO;
+import co.edu.udes.activity.backend.demo.dto.RoleRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Permission;
-import co.edu.udes.activity.backend.demo.models.Role;
+
 import co.edu.udes.activity.backend.demo.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/roles")
 public class RoleController {
-    
+
     @Autowired
     private RoleService roleService;
 
     @GetMapping
-    public List<Role> getAllRoles() {
+    public List<RoleDTO> getAllRoles() {
         return roleService.getAllRoles();
     }
 
     @GetMapping("/{id}")
-    public Optional<Role> getRoleById(@PathVariable Long id) {
-        return roleService.getRoleById(id);
+    public ResponseEntity<RoleDTO> getRoleById(@PathVariable Long id) {
+        return roleService.getRoleById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Role createRole(@RequestBody Role role) {
-        return roleService.saveRole(role);
+    public ResponseEntity<RoleDTO> createRole(@RequestBody RoleRequestDTO dto) {
+        RoleDTO created = roleService.saveRole(dto);
+        return ResponseEntity.ok(created);
     }
 
     @PutMapping("/{id}")
-    public Role updateRole(@PathVariable Long id, @RequestBody Role updatedRole) {
-        return roleService.updateRole(id, updatedRole);
+    public ResponseEntity<RoleDTO> updateRole(@PathVariable Long id, @RequestBody RoleRequestDTO dto) {
+        RoleDTO updated = roleService.updateRole(id, dto);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteRole(@PathVariable Long id) {
+    public ResponseEntity<String> deleteRole(@PathVariable Long id) {
         boolean deleted = roleService.deleteRole(id);
-        return deleted ? "Rol eliminado correctamente" : "No se encontró el rol con ID: " + id;
+        return deleted ? ResponseEntity.ok("Rol eliminado correctamente")
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el rol con ID: " + id);
     }
 
-    @PostMapping("/{roleId}/permissions")
-    public ResponseEntity<Role> addPermission(@PathVariable Long roleId, @RequestBody Permission permission) {
-        Role updatedRole = roleService.addPermissionToRole(roleId, permission);
-        return updatedRole != null ? ResponseEntity.ok(updatedRole) : ResponseEntity.notFound().build();
+    @PostMapping("/{roleId}/permissions/{permissionId}")
+    public ResponseEntity<RoleDTO> addPermission(@PathVariable Long roleId, @PathVariable Long permissionId) {
+        RoleDTO updated = roleService.addPermissionToRole(roleId, permissionId);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{roleId}/permissions")
-    public ResponseEntity<Role> removePermission(@PathVariable Long roleId, @RequestBody Permission permission) {
-        Role updatedRole = roleService.removePermissionFromRole(roleId, permission);
-        return updatedRole != null ? ResponseEntity.ok(updatedRole) : ResponseEntity.notFound().build();
+    @DeleteMapping("/{roleId}/permissions/{permissionId}")
+    public ResponseEntity<RoleDTO> removePermission(@PathVariable Long roleId, @PathVariable Long permissionId) {
+        RoleDTO updated = roleService.removePermissionFromRole(roleId, permissionId);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{roleId}/permissions")
@@ -60,3 +68,4 @@ public class RoleController {
         return permissions != null ? ResponseEntity.ok(permissions) : ResponseEntity.notFound().build();
     }
 }
+

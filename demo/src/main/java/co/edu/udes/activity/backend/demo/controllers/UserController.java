@@ -1,19 +1,20 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
-import co.edu.udes.activity.backend.demo.models.User;
+import co.edu.udes.activity.backend.demo.dto.UserDTO;
+import co.edu.udes.activity.backend.demo.dto.UserRequestDTO;
 import co.edu.udes.activity.backend.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
 
@@ -25,41 +26,43 @@ public class UserController {
 
     @PutMapping("/{id}/change-password")
     public ResponseEntity<String> changePassword(@PathVariable Long id, @RequestBody String newPassword) {
-        boolean changed = userService.changePassword(id, newPassword).getStatus();
+        boolean changed = userService.changePassword(id, newPassword);
         return changed ? ResponseEntity.ok("Password updated") : ResponseEntity.notFound().build();
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserRequestDTO userRequestDTO) {
+        UserDTO userDTO = userService.saveUser(userRequestDTO);
+        return ResponseEntity.ok(userDTO);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        return userService.updateUser(id, updatedUser);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO) {
+        UserDTO updated = userService.updateUser(id, userRequestDTO);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         boolean deleted = userService.deleteUser(id);
-        return deleted ? "Usuario eliminado correctamente" : "No se encontró el usuario con ID: " + id;
+        return deleted ? ResponseEntity.ok("Usuario eliminado correctamente") : ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}/assign-role/{roleId}")
     public ResponseEntity<String> assignRole(@PathVariable Long id, @PathVariable Long roleId) {
-        boolean assigned = userService.assignRole(id, roleId).getStatus();
-        return assigned ? ResponseEntity.ok("Role assigned") : ResponseEntity.badRequest().body("Failed to assign role");
+        boolean assigned = userService.assignRole(id, roleId);
+        return assigned ? ResponseEntity.ok("Rol asignado") : ResponseEntity.badRequest().body("No se pudo asignar el rol");
     }
-
-
 }
+

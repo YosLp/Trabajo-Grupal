@@ -1,6 +1,6 @@
-
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.AcademicRecordDTO;
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
 import co.edu.udes.activity.backend.demo.services.AcademicRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,30 @@ public class AcademicRecordController {
     private AcademicRecordService academicRecordService;
 
     @GetMapping
-    public List<AcademicRecord> getAllAcademicRecords() {
+    public List<AcademicRecordDTO> getAllAcademicRecords() {
         return academicRecordService.getAllAcademicRecords();
     }
 
     @GetMapping("/{id}")
-    public Optional<AcademicRecord> getAcademicRecordById(@PathVariable long id) {
+    public Optional<AcademicRecordDTO> getAcademicRecordById(@PathVariable long id) {
         return academicRecordService.getAcademicRecordById(id);
     }
 
     @PostMapping
-    public AcademicRecord createAcademicRecord(@RequestBody AcademicRecord academicRecord) {
+    public AcademicRecord createAcademicRecord(@RequestBody AcademicRecordDTO academicRecordDTO) {
+        // Mapeo del DTO al modelo antes de guardarlo
+        AcademicRecord academicRecord = new AcademicRecord();
+        academicRecord.setAcademicHistory(academicRecordDTO.getAcademicHistory());
+        // Aquí se debe agregar el mapeo para las entidades Group y Student
         return academicRecordService.saveAcademicRecord(academicRecord);
     }
 
     @PutMapping("/{id}")
-    public AcademicRecord updateAcademicRecord(@PathVariable long id, @RequestBody AcademicRecord updatedAcademicRecord) {
+    public AcademicRecord updateAcademicRecord(@PathVariable long id, @RequestBody AcademicRecordDTO updatedAcademicRecordDTO) {
+        // Mapeo del DTO al modelo antes de actualizarlo
+        AcademicRecord updatedAcademicRecord = new AcademicRecord();
+        updatedAcademicRecord.setAcademicHistory(updatedAcademicRecordDTO.getAcademicHistory());
+        // Aquí se debe agregar el mapeo para las entidades Group y Student
         return academicRecordService.updateAcademicRecord(id, updatedAcademicRecord);
     }
 
@@ -43,8 +51,7 @@ public class AcademicRecordController {
     }
 
     @GetMapping("/student/{studentId}/history")
-    public List<AcademicRecord> getAcademicHistoryByStudentId(@PathVariable Long studentId) {
+    public List<AcademicRecordDTO> getAcademicHistoryByStudentId(@PathVariable Long studentId) {
         return academicRecordService.getAcademicHistoryByStudentId(studentId);
     }
 }
-

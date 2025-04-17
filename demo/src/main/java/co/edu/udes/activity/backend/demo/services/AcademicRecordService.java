@@ -1,5 +1,6 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.AcademicRecordDTO;
 import co.edu.udes.activity.backend.demo.models.AcademicRecord;
 import co.edu.udes.activity.backend.demo.repositories.AcademicRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AcademicRecordService {
@@ -18,23 +20,28 @@ public class AcademicRecordService {
         this.academicRecordRepository = academicRecordRepository;
     }
 
-    public List<AcademicRecord> getAllAcademicRecords() {
-        return academicRecordRepository.findAll();
+    // Convertir la lista de AcademicRecord a AcademicRecordDTO
+    public List<AcademicRecordDTO> getAllAcademicRecords() {
+        return academicRecordRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<AcademicRecord> getAcademicRecordById(long id) {
-        return academicRecordRepository.findById(id);
+    public Optional<AcademicRecordDTO> getAcademicRecordById(long id) {
+        return academicRecordRepository.findById(id)
+                .map(this::convertToDTO);
     }
 
-    public AcademicRecord saveAcademicRecord(AcademicRecord academicRecord) {
+    public AcademicRecord saveAcademicRecord(AcademicRecord academicRecordDTO) {
+        // Convertir el DTO a entidad y guardarlo
+        AcademicRecord academicRecord = convertToEntity(academicRecordDTO);
         return academicRecordRepository.save(academicRecord);
     }
 
-    public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecord) {
+    public AcademicRecord updateAcademicRecord(long id, AcademicRecord updatedAcademicRecordDTO) {
         return academicRecordRepository.findById(id).map(academicRecord -> {
-            academicRecord.setAcademicHistory(updatedAcademicRecord.getAcademicHistory());
-            academicRecord.setGroup(updatedAcademicRecord.getGroup());
-            academicRecord.setStudent(updatedAcademicRecord.getStudent());
+            academicRecord.setAcademicHistory(updatedAcademicRecordDTO.getAcademicHistory());
+            // Aquí deberías incluir lógica para actualizar las relaciones de Group y Student
             return academicRecordRepository.save(academicRecord);
         }).orElse(null);
     }
@@ -47,7 +54,27 @@ public class AcademicRecordService {
         return false;
     }
 
-    public List<AcademicRecord> getAcademicHistoryByStudentId(Long studentId) {
-        return academicRecordRepository.findByStudentId(studentId);
+    public List<AcademicRecordDTO> getAcademicHistoryByStudentId(Long studentId) {
+        return academicRecordRepository.findByStudentId(studentId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Método para convertir una entidad AcademicRecord a AcademicRecordDTO
+    private AcademicRecordDTO convertToDTO(AcademicRecord academicRecord) {
+        AcademicRecordDTO dto = new AcademicRecordDTO();
+        dto.setIdAcademicRecord(academicRecord.getIdAcademicRecord());
+        dto.setAcademicHistory(academicRecord.getAcademicHistory());
+        dto.setGroupId((long) academicRecord.getGroup().getIdGroup());
+        dto.setStudentId(academicRecord.getStudent().getId());
+        return dto;
+    }
+
+    // Método para convertir un AcademicRecordDTO a una entidad AcademicRecord
+    private AcademicRecord convertToEntity(AcademicRecord academicRecordDTO) {
+        AcademicRecord academicRecord = new AcademicRecord();
+        academicRecord.setAcademicHistory(academicRecordDTO.getAcademicHistory());
+        // Aquí deberías incluir la lógica para obtener el Group y Student según los IDs
+        return academicRecord;
     }
 }

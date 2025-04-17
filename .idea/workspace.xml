@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/config/SwaggerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/AcademicRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/AcademicRecordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/FeedbackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/controllers/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/FeedbackDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/FeedbackDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/GroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/GroupDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/ReportDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/dto/ReportDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Subject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/FeedbackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/FeedbackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/services/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +91,7 @@
       <workItem from="1744764899528" duration="11023000" />
       <workItem from="1744815530093" duration="3544000" />
       <workItem from="1744846791542" duration="6453000" />
+      <workItem from="1744856717709" duration="3554000" />
     </task>
     <servers />
   </component>

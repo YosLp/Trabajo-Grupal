@@ -39,7 +39,7 @@ public class EvaluationService {
         return evaluationRepository.findAll().stream()
                 .map(evaluation -> {
                     EvaluationDTO dto = new EvaluationDTO();
-                    dto.setIdEvaluation(evaluation.getIdEvaluation());
+                    dto.setIdEvaluation(evaluation.getId());
                     dto.setType(evaluation.getType());
                     dto.setMaxScore(evaluation.getMaxScore());
                     dto.setEvaluationDate(evaluation.getEvaluationDate());
@@ -62,7 +62,7 @@ public class EvaluationService {
         if (evaluation.isPresent()) {
             Evaluation eval = evaluation.get();
             EvaluationDTO dto = new EvaluationDTO();
-            dto.setIdEvaluation(eval.getIdEvaluation());
+            dto.setIdEvaluation(eval.getId());
             dto.setType(eval.getType());
             dto.setMaxScore(eval.getMaxScore());
             dto.setEvaluationDate(eval.getEvaluationDate());

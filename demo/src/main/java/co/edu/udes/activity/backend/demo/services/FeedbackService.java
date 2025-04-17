@@ -86,23 +86,23 @@ public class FeedbackService {
     }
 
     private Evaluation getLatestEvaluationForGroup(Group group) {
-        List<Evaluation> evaluations = evaluationRepository.findByGroupId(group.getIdGroup());
+        List<Evaluation> evaluations = evaluationRepository.findByGroup_IdGroup((long) group.getIdGroup());
         return evaluations.isEmpty() ? null : evaluations.get(0);
     }
 
     private FeedbackDTO convertToDTO(Feedback feedback) {
         FeedbackDTO dto = new FeedbackDTO();
-        dto.setIdFeedback(feedback.getIdFeedback());
+        dto.setIdFeedback(Math.toIntExact(feedback.getIdFeedback()));
         dto.setMessage(feedback.getMessage());
         dto.setSentAt(feedback.getSentAt());
         dto.setTeacherId(feedback.getTeacher().getId());
-        dto.setEvaluationId(feedback.getEvaluation().getIdEvaluation());
+        dto.setEvaluationId(feedback.getEvaluation().getId());
         return dto;
     }
 
     private Feedback convertToEntity(FeedbackDTO dto) {
         Feedback feedback = new Feedback();
-        feedback.setIdFeedback(dto.getIdFeedback());
+        feedback.setIdFeedback((long) dto.getIdFeedback());
         feedback.setMessage(dto.getMessage());
         feedback.setSentAt(dto.getSentAt());
 

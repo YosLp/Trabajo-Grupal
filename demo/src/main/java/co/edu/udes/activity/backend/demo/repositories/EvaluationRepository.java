@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
-    List<Evaluation> findByGroupId(long groupId);
+    List<Evaluation> findByGroup_IdGroup(Long idGroup); // Método adecuado
 }

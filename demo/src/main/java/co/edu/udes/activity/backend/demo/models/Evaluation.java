@@ -12,7 +12,7 @@ public class Evaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEvaluation;
+    private Long id;
 
     @Column(name = "type", nullable = false)
     private int type;

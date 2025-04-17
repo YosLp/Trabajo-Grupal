@@ -10,7 +10,7 @@ import java.util.Date;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idFeedback;
+    private Long idFeedback;
 
     @Column(name = "message", nullable = false)
     private String message;
@@ -30,4 +30,3 @@ public class Feedback {
 
     }
 }
-

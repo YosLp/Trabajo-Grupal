@@ -1,6 +1,7 @@
 package co.edu.udes.activity.backend.demo.dto;
 
 import co.edu.udes.activity.backend.demo.models.Material;
+import co.edu.udes.activity.backend.demo.models.Messaging;
 import co.edu.udes.activity.backend.demo.models.User;
 import lombok.Data;
 
@@ -8,13 +9,11 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-public class LoanDTO {
+public class LoanRequestDTO {
 
-    private long id;
     private LocalDateTime loanDate;
     private LocalDateTime returnDate;
-    private User user;
-    private Set<Material> materials;
+    private Long userId;
+    private Set<Long> materialsId;
     private String status;
-
 }

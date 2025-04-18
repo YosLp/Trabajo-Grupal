@@ -15,20 +15,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // Lee usuario y password de application.properties
+
     @Value("${spring.security.user.name}")
     private String username;
 
     @Value("${spring.security.user.password}")
     private String password;
 
-    // 1) PasswordEncoder para encriptar/chequear
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 2) UserDetailsService en memoria usando el encoder y tus props
+
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder encoder) {
         UserDetails user = User.builder()
@@ -39,15 +39,15 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
-    // 3) Cadena de filtros: todas las rutas requieren login + formLogin + basic auth
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-          .authorizeHttpRequests(auth -> auth
-              .anyRequest().authenticated()
-          )
-          .formLogin(Customizer.withDefaults())
-          .httpBasic(Customizer.withDefaults());
-        return http.build();
+        return http
+                .csrf(csrf -> csrf.disable()) // CSRF deshabilitado para permitir POST/PUT/DELETE desde Postman/Swagger
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().authenticated() // Requiere autenticación para cualquier endpoint
+                )
+                .httpBasic(Customizer.withDefaults()) // Activa Basic Auth (admin/admin)
+                .build();
     }
 }

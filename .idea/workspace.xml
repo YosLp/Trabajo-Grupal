@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/AttendanceDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/AttendanceDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/CareerDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/CareerDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ClassDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ClassDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ClassroomDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ClassroomDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/CourseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/CourseDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/PeriodDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/PeriodDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/PrerequisiteDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/PrerequisiteDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ScheduleDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/ScheduleDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/SubjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT/WEB-INF/classes/co/edu/udes/activity/backend/demo/dto/SubjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/generated-sources/co/edu/udes/activity/backend/demo/codegen/DgsConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/generated-sources/co/edu/udes/activity/backend/demo/codegen/DgsConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/generated-sources/co/edu/udes/activity/backend/demo/codegen/Generated.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/generated-sources/co/edu/udes/activity/backend/demo/codegen/Generated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-ids/junit-platform-unique-ids-2774144856299140068.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +107,8 @@
       <workItem from="1744856717709" duration="3554000" />
       <workItem from="1744861023111" duration="7148000" />
       <workItem from="1744868342027" duration="53000" />
+      <workItem from="1744933756048" duration="247000" />
+      <workItem from="1744934082887" duration="653000" />
     </task>
     <servers />
   </component>

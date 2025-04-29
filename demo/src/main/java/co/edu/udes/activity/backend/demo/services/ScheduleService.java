@@ -1,6 +1,7 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.dto.StudentScheduleDTO;
+import co.edu.udes.activity.backend.demo.dto.TeacherScheduleDTO;
 import co.edu.udes.activity.backend.demo.models.Class;
 import co.edu.udes.activity.backend.demo.models.Schedule;
 import co.edu.udes.activity.backend.demo.repositories.ScheduleRepository;
@@ -46,7 +47,6 @@ public class ScheduleService {
         return false;
     }
 
-
     public List<StudentScheduleDTO> getScheduleForStudent(Long idStudent) {
         List<StudentScheduleDTO> result = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -78,6 +78,36 @@ public class ScheduleService {
 
         if (!studentFound) {
             throw new RuntimeException("El estudiante con ID " + idStudent + " no tiene inscripciones.");
+        }
+        return result;
+    }
+
+    public List<TeacherScheduleDTO> getScheduleForTeacher(Long idTeacher) {
+        List<TeacherScheduleDTO> result = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        boolean teacherFound = false;
+
+        for (Schedule schedule : scheduleRepository.findAll()) {
+            if (schedule.getClasses() != null) {
+                for (Class clazz : schedule.getClasses()) {
+                    if (clazz.getGroup() != null &&
+                            clazz.getGroup().getTeacher() != null &&
+                            clazz.getGroup().getTeacher().getId() == idTeacher){
+
+                        teacherFound = true;
+                        TeacherScheduleDTO dto = new TeacherScheduleDTO();
+                        dto.setGroupName(clazz.getGroup().getName());
+                        dto.setClassName(clazz.getDescription());
+                        dto.setStartHour(format.format(clazz.getStarHour()));
+                        dto.setEndHour(format.format(clazz.getEndHour()));
+                        result.add(dto);
+                    }
+                }
+            }
+        }
+
+        if (!teacherFound) {
+            throw new RuntimeException("El profesor con ID " + idTeacher + " no tiene clases asignadas.");
         }
         return result;
     }

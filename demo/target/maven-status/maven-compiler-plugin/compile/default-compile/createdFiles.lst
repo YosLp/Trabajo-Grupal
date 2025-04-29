@@ -127,6 +127,7 @@ co\edu\udes\activity\backend\demo\controllers\FeedbackController.class
 co\edu\udes\activity\backend\demo\services\AcademicRecordService.class
 co\edu\udes\activity\backend\demo\repositories\ClassRepository.class
 co\edu\udes\activity\backend\demo\dto\CareerDTO.class
+co\edu\udes\activity\backend\demo\dto\EnrollmentRequestDTO.class
 co\edu\udes\activity\backend\demo\models\Enrollment.class
 co\edu\udes\activity\backend\demo\services\ScheduleService.class
 co\edu\udes\activity\backend\demo\controllers\ClassroomController.class

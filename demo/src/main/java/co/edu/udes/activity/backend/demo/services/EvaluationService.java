@@ -24,7 +24,7 @@ public class EvaluationService {
         teacher.setId(evaluationDTO.getTeacherId());
 
         Group group = new Group();
-        group.setIdGroup(Math.toIntExact(evaluationDTO.getGroupId()));
+        group.setId(Math.toIntExact(evaluationDTO.getGroupId()));
 
         Evaluation evaluation = new Evaluation();
         evaluation.setType(evaluationDTO.getType());
@@ -49,7 +49,7 @@ public class EvaluationService {
                     }
 
                     if (evaluation.getGroup() != null) {
-                        dto.setGroupId((long) evaluation.getGroup().getIdGroup());
+                        dto.setGroupId((long) evaluation.getGroup().getId());
                     }
 
                     return dto;
@@ -72,7 +72,7 @@ public class EvaluationService {
             }
 
             if (eval.getGroup() != null) {
-                dto.setGroupId((long) eval.getGroup().getIdGroup());
+                dto.setGroupId((long) eval.getGroup().getId());
             }
 
             return dto;
@@ -93,7 +93,7 @@ public class EvaluationService {
             eval.setTeacher(teacher);
 
             Group group = new Group();
-            group.setIdGroup(Math.toIntExact(updatedEvaluationDTO.getGroupId()));
+            group.setId(Math.toIntExact(updatedEvaluationDTO.getGroupId()));
             eval.setGroup(group);
 
             return evaluationRepository.save(eval);

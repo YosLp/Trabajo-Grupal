@@ -1,10 +1,13 @@
 package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.dto.EnrollmentDTO;
+import co.edu.udes.activity.backend.demo.dto.EnrollmentRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Enrollment;
 import co.edu.udes.activity.backend.demo.models.Group;
 import co.edu.udes.activity.backend.demo.models.Student;
 import co.edu.udes.activity.backend.demo.repositories.EnrollmentRepository;
+import co.edu.udes.activity.backend.demo.repositories.GroupRepository;
+import co.edu.udes.activity.backend.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,58 +16,94 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Service
 public class EnrollmentService {
 
-    private final EnrollmentRepository enrollmentRepository;
+    @Autowired
+    private EnrollmentRepository enrollmentRepository;
 
     @Autowired
-    public EnrollmentService(EnrollmentRepository enrollmentRepository) {
-        this.enrollmentRepository = enrollmentRepository;
-    }
+    private StudentRepository studentRepository;
 
-    private EnrollmentDTO convertToDTO(Enrollment enrollment) {
-        EnrollmentDTO dto = new EnrollmentDTO();
-        dto.setId(enrollment.getIdEnrollment());
-        dto.setStudentName(enrollment.getStudent().getFirstName() + " " + enrollment.getStudent().getLastName());
-        dto.setGroupName(enrollment.getGroup().getName());
-        dto.setEnrollmentDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(enrollment.getEnrollmentDate()));
-        dto.setStatus(enrollment.getStatus());
-        return dto;
-    }
+    @Autowired
+    private GroupRepository groupRepository;
 
     public List<EnrollmentDTO> getAllEnrollments() {
-        return enrollmentRepository.findAll().stream()
+        return enrollmentRepository.findAll()
+                .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    public Optional<EnrollmentDTO> getEnrollmentById(long id) {
-        return enrollmentRepository.findById(id).map(this::convertToDTO);
+    public EnrollmentDTO getEnrollmentById(Long id) {
+        return enrollmentRepository.findById(id)
+                .map(this::convertToDTO)
+                .orElse(null);
     }
 
-    public EnrollmentDTO saveEnrollment(Enrollment enrollment) {
-        enrollment.setEnrollmentDate(new Date());
-        enrollment.setStatus("Enrolled");
-        return convertToDTO(enrollmentRepository.save(enrollment));
+    public EnrollmentDTO createEnrollment(EnrollmentRequestDTO req) {
+        Student student = studentRepository.findById(req.getStudentId())
+                .orElseThrow(() -> new RuntimeException("Student not found: " + req.getStudentId()));
+        Group group = groupRepository.findById(req.getGroupId())
+                .orElseThrow(() -> new RuntimeException("Group not found: " + req.getGroupId()));
+
+        Enrollment en = new Enrollment();
+        en.setStudent(student);
+        en.setGroup(group);
+        en.setEnrollmentDate(req.getEnrollmentDate());
+        en.setStatus(req.getStatus());
+        en.setQualification(req.getQualification());
+        en.setP1_qualification(req.getP1Qualification());
+        en.setP2_qualification(req.getP2Qualification());
+        en.setP3_qualification(req.getP3Qualification());
+
+        return convertToDTO(enrollmentRepository.save(en));
     }
 
-    public EnrollmentDTO updateEnrollment(long id, Enrollment updatedEnrollment) {
-        return enrollmentRepository.findById(id).map(enrollment -> {
-            enrollment.setStudent(updatedEnrollment.getStudent());
-            enrollment.setGroup(updatedEnrollment.getGroup());
-            enrollment.setEnrollmentDate(updatedEnrollment.getEnrollmentDate());
-            enrollment.setStatus(updatedEnrollment.getStatus());
-            return convertToDTO(enrollmentRepository.save(enrollment));
-        }).orElse(null);
+    public EnrollmentDTO updateEnrollment(Long id, EnrollmentRequestDTO req) {
+        Optional<Enrollment> opt = enrollmentRepository.findById(id);
+        if (opt.isPresent()) {
+            Enrollment en = opt.get();
+            studentRepository.findById(req.getStudentId()).ifPresent(en::setStudent);
+            groupRepository.findById(req.getGroupId()).ifPresent(en::setGroup);
+            en.setEnrollmentDate(req.getEnrollmentDate());
+            en.setStatus(req.getStatus());
+            en.setQualification(req.getQualification());
+            en.setP1_qualification(req.getP1Qualification());
+            en.setP2_qualification(req.getP2Qualification());
+            en.setP3_qualification(req.getP3Qualification());
+            return convertToDTO(enrollmentRepository.save(en));
+        }
+        return null;
     }
 
-    public boolean deleteEnrollment(long id) {
+    public boolean deleteEnrollment(Long id) {
         if (enrollmentRepository.existsById(id)) {
             enrollmentRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    private EnrollmentDTO convertToDTO(Enrollment en) {
+        EnrollmentDTO dto = new EnrollmentDTO();
+        dto.setIdEnrollment(en.getIdEnrollment());
+        dto.setStudentId(en.getStudent().getId());
+        dto.setGroupId(en.getGroup().getId());
+        dto.setEnrollmentDate(en.getEnrollmentDate());
+        dto.setStatus(en.getStatus());
+        dto.setQualification(en.getQualification());
+        dto.setP1Qualification(en.getP1_qualification());
+        dto.setP2Qualification(en.getP2_qualification());
+        dto.setP3Qualification(en.getP3_qualification());
+        return dto;
+    }
+
+    public EnrollmentService(EnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
+
+    public List<Enrollment> getEnrollmentsByStudentId(Long studentId) {
+        return enrollmentRepository.findByStudentId(studentId);
     }
 }

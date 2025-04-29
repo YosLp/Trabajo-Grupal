@@ -86,7 +86,7 @@ public class FeedbackService {
     }
 
     private Evaluation getLatestEvaluationForGroup(Group group) {
-        List<Evaluation> evaluations = evaluationRepository.findByGroup_IdGroup((long) group.getIdGroup());
+        List<Evaluation> evaluations = evaluationRepository.findByGroupId((long) group.getId());
         return evaluations.isEmpty() ? null : evaluations.get(0);
     }
 

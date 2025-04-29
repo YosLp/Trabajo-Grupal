@@ -93,6 +93,7 @@ C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\models\Prerequisite.java
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\models\Permission.java
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\dto\ClassroomDTO.java
+C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\dto\EnrollmentRequestDTO.java
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\dto\SubjectDTO.java
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\models\Teacher.java
 C:\Users\usuario\Documents\GitHub\Trabajo-Grupal\demo\src\main\java\co\edu\udes\activity\backend\demo\controllers\EvaluationController.java

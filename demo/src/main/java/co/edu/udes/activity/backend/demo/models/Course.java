@@ -38,6 +38,10 @@ public class Course {
     @Column(name = "capacity")
     private int capacity;
 
+    @Column(name = "status")
+    private boolean status;
+
+
 
     @ManyToOne
     @JoinColumn(name = "idCareer", nullable = false)

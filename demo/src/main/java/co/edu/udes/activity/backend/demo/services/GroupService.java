@@ -28,7 +28,7 @@ public class GroupService {
 
     private GroupDTO convertToDTO(Group group) {
         GroupDTO dto = new GroupDTO();
-        dto.setId(group.getIdGroup());
+        dto.setId(group.getId());
         dto.setName(group.getName());
         dto.setStudentsAmount(group.getStudentsAmount());
         dto.setTeacherName(group.getTeacher() != null ? group.getTeacher().getFirstName() + " " + group.getTeacher().getLastName() : "Sin asignar");

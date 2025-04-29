@@ -21,6 +21,10 @@ public class Student extends User {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "Career_id", nullable = false)
+    private Career career;
+
     public Student() {
     }
 }

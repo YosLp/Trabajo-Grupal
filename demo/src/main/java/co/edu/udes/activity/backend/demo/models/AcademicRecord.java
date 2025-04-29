@@ -14,13 +14,16 @@ public class AcademicRecord {
     @Column(name = "academicHistory", length = 1000, nullable = false)
     private String academicHistory;
 
-    @ManyToOne
-    @JoinColumn(name = "idGroup", nullable = false)
-    private Group group;
 
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "idGroup", nullable = false)
+    private Group group;
 
+    public AcademicRecord() {
+
+    }
 }

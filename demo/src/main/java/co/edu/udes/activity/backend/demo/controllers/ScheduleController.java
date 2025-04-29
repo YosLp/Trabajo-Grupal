@@ -1,11 +1,8 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
-import co.edu.udes.activity.backend.demo.dto.StudentScheduleDTO;
-import co.edu.udes.activity.backend.demo.dto.TeacherScheduleDTO;
 import co.edu.udes.activity.backend.demo.models.Schedule;
 import co.edu.udes.activity.backend.demo.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,25 +39,5 @@ public class ScheduleController {
     public String deleteSchedule(@PathVariable Integer id) {
         boolean deleted = scheduleService.deleteSchedule(id);
         return deleted ? "Schedule deleted successfully" : "Schedule not found with id: " + id;
-    }
-
-    @GetMapping("/student/{idStudent}")
-    public ResponseEntity<?> getScheduleForStudent(@PathVariable Long idStudent) {
-        try {
-            List<StudentScheduleDTO> schedule = scheduleService.getScheduleForStudent(idStudent);
-            return ResponseEntity.ok(schedule);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/teacher/{idTeacher}")
-    public ResponseEntity<?> getScheduleForTeacher(@PathVariable Long idTeacher) {
-        try {
-            List<TeacherScheduleDTO> schedule = scheduleService.getScheduleForTeacher(idTeacher);
-            return ResponseEntity.ok(schedule);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 }

@@ -11,8 +11,9 @@ import java.util.List;
 public class Group {
 
     @Id
+    @Column(name = "id_group", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idGroup;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;

@@ -20,7 +20,7 @@ public class AcademicRecordService {
         this.academicRecordRepository = academicRecordRepository;
     }
 
-    // Convertir la lista de AcademicRecord a AcademicRecordDTO
+
     public List<AcademicRecordDTO> getAllAcademicRecords() {
         return academicRecordRepository.findAll().stream()
                 .map(this::convertToDTO)
@@ -65,7 +65,7 @@ public class AcademicRecordService {
         AcademicRecordDTO dto = new AcademicRecordDTO();
         dto.setIdAcademicRecord(academicRecord.getIdAcademicRecord());
         dto.setAcademicHistory(academicRecord.getAcademicHistory());
-        dto.setGroupId((long) academicRecord.getGroup().getIdGroup());
+        dto.setGroupId((long) academicRecord.getGroup().getId());
         dto.setStudentId(academicRecord.getStudent().getId());
         return dto;
     }

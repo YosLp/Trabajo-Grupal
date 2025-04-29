@@ -1,7 +1,7 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.dto.EnrollmentDTO;
-import co.edu.udes.activity.backend.demo.models.Enrollment;
+import co.edu.udes.activity.backend.demo.dto.EnrollmentCreateDTO;
 import co.edu.udes.activity.backend.demo.services.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +29,13 @@ public class EnrollmentController {
     }
 
     @PostMapping
-    public ResponseEntity<EnrollmentDTO> createEnrollment(@RequestBody Enrollment enrollment) {
-        return ResponseEntity.ok(enrollmentService.saveEnrollment(enrollment));
+    public ResponseEntity<EnrollmentDTO> createEnrollment(@RequestBody EnrollmentCreateDTO enrollmentCreateDTO) {
+        return ResponseEntity.ok(enrollmentService.saveEnrollment(enrollmentCreateDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EnrollmentDTO> updateEnrollment(@PathVariable Long id, @RequestBody Enrollment updatedEnrollment) {
-        EnrollmentDTO updated = enrollmentService.updateEnrollment(id, updatedEnrollment);
+    public ResponseEntity<EnrollmentDTO> updateEnrollment(@PathVariable Long id, @RequestBody EnrollmentCreateDTO updatedEnrollmentDTO) {
+        EnrollmentDTO updated = enrollmentService.updateEnrollment(id, updatedEnrollmentDTO);
         if (updated != null) {
             return ResponseEntity.ok(updated);
         } else {

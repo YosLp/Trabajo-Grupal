@@ -22,7 +22,5 @@ public class AcademicRecord {
     @JoinColumn(name = "idStudent", nullable = false)
     private Student student;
 
-    public AcademicRecord() {
 
-    }
 }

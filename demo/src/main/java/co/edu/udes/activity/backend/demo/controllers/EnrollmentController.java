@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/enrollments")
 public class EnrollmentController {
@@ -59,4 +58,3 @@ public class EnrollmentController {
         return enrollmentService.getEnrollmentsByStudentId(studentId);
     }
 }
-

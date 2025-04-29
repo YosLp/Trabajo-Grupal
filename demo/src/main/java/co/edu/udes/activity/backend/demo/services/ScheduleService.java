@@ -92,7 +92,7 @@ public class ScheduleService {
                 for (Class clazz : schedule.getClasses()) {
                     if (clazz.getGroup() != null &&
                             clazz.getGroup().getTeacher() != null &&
-                            clazz.getGroup().getTeacher().getId() == idTeacher){
+                            clazz.getGroup().getTeacher().getId() == idTeacher) {
 
                         teacherFound = true;
                         TeacherScheduleDTO dto = new TeacherScheduleDTO();

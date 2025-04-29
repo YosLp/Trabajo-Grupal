@@ -14,8 +14,8 @@ public class EnrollmentRequestDTO {
     private Date enrollmentDate;
 
     private String status;
-    private long qualification;
-    private long p1Qualification;
-    private long p2Qualification;
-    private long p3Qualification;
+    private Long qualification;
+    private Long p1Qualification;
+    private Long p2Qualification;
+    private Long p3Qualification;
 }

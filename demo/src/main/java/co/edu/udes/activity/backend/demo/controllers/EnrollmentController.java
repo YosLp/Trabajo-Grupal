@@ -2,6 +2,7 @@ package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.dto.EnrollmentDTO;
 import co.edu.udes.activity.backend.demo.dto.EnrollmentRequestDTO;
+import co.edu.udes.activity.backend.demo.dto.NotasRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Enrollment;
 import co.edu.udes.activity.backend.demo.services.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/enrollments")
@@ -54,7 +56,28 @@ public class EnrollmentController {
     }
 
     @GetMapping("/student/{studentId}")
-    public List<Enrollment> getEnrollmentsByStudent(@PathVariable Long studentId) {
-        return enrollmentService.getEnrollmentsByStudentId(studentId);
+    public ResponseEntity<List<EnrollmentDTO>> getEnrollmentsByStudent(@PathVariable Long studentId) {
+        List<Enrollment> enrollments = enrollmentService.getEnrollmentsByStudentId(studentId);
+        List<EnrollmentDTO> dtos = enrollments.stream()
+                .map(enrollment -> enrollmentService.mapToDTO(enrollment))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/student/{studentId}/group/{groupId}/grades")
+    public ResponseEntity<EnrollmentDTO> getGradesByStudentAndGroup(
+            @PathVariable Long studentId,
+            @PathVariable Long groupId) {
+
+        EnrollmentDTO dto = enrollmentService.getEnrollmentGradesByStudentAndGroup(studentId, groupId);
+        return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}/cargar-notas")
+    public ResponseEntity<EnrollmentDTO> cargarNotas(
+            @PathVariable Long id,
+            @RequestBody NotasRequestDTO dto) {
+        EnrollmentDTO updated = enrollmentService.cargarNotas(id, dto);
+        return ResponseEntity.ok(updated);
     }
 }

@@ -30,14 +30,14 @@ public class Enrollment {
     private String status;
 
     @Column(name = "qualification")
-    private Long qualification;
+    private Double qualification;
 
     @Column(name = "P1_qualification")
-    private Long p1Qualification;
+    private Double p1Qualification;
 
     @Column(name = "P2_qualification")
-    private Long p2Qualification;
+    private Double p2Qualification;
 
     @Column(name = "P3_qualification")
-    private Long p3Qualification;
+    private Double p3Qualification;
 }

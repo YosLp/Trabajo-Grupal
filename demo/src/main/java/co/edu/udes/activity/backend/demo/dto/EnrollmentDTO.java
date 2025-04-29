@@ -10,8 +10,10 @@ public class EnrollmentDTO {
     private Long groupId;
     private Date enrollmentDate;
     private String status;
-    private Long qualification;
-    private Long p1Qualification;
-    private Long p2Qualification;
-    private Long p3Qualification;
+    private Double qualification;
+    private Double p1Qualification;
+    private Double p2Qualification;
+    private Double p3Qualification;
+    private String studentName;
+    private String subjectName;
 }

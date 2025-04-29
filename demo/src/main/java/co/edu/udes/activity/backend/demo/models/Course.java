@@ -42,7 +42,6 @@ public class Course {
     private boolean status;
 
 
-
     @ManyToOne
     @JoinColumn(name = "idCareer", nullable = false)
     private Career career;

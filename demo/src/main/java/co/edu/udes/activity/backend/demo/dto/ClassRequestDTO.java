@@ -4,13 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
-
 
 @Data
-public class ClassDTO {
-    private Long id;
+public class ClassRequestDTO {
     private LocalDate fecha;
     private LocalTime starHour;
     private LocalTime endHour;

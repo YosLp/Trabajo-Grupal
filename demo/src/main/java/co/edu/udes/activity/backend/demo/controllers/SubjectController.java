@@ -1,5 +1,7 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.SubjectDTO;
+import co.edu.udes.activity.backend.demo.dto.SubjectRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Subject;
 import co.edu.udes.activity.backend.demo.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +17,30 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
+    @PostMapping
+    public SubjectDTO createSubject(@RequestBody SubjectRequestDTO dto) {
+        return subjectService.createSubject(dto);
+    }
+
     @GetMapping
-    public List<Subject> getAllSubjects() {
+    public List<SubjectDTO> getAllSubjects() {
         return subjectService.getAllSubjects();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Subject> getSubjectById(@PathVariable Integer id) {
-        return subjectService.getSubjectById(id);
+    @PostMapping("/{subjectId}/prerequisite/{prerequisiteId}")
+    public SubjectDTO assignPrerequisite(
+            @PathVariable Long subjectId,
+            @PathVariable Long prerequisiteId) {
+        return subjectService.assignPrerequisite(subjectId, prerequisiteId);
     }
 
-    @PostMapping
-    public Subject createSubject(@RequestBody Subject subject) {
-        return subjectService.saveSubject(subject);
-    }
-
-    @PutMapping("/{id}")
-    public Subject updateSubject(@PathVariable Integer id, @RequestBody Subject updatedSubject) {
-        return subjectService.updateSubject(id, updatedSubject);
+    @GetMapping("/{subjectId}/prerequisites")
+    public List<SubjectDTO> getPrerequisites(@PathVariable Long subjectId) {
+        return subjectService.getPrerequisites(subjectId);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteSubject(@PathVariable Integer id) {
-        boolean deleted = subjectService.deleteSubject(id);
-        return deleted ? "Subject deleted successfully" : "Subject not found with id: " + id;
+    public void deleteSubject(@PathVariable Long id) {
+        subjectService.deleteSubject(id);
     }
 }

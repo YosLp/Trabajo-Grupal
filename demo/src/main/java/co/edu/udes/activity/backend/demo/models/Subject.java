@@ -8,29 +8,29 @@ import java.util.List;
 @Data
 @Table(name = "Subject")
 public class Subject {
-
+//ESTA ES LA ASIGNATURA O MATERIA PILAS QUE ES DIFERENTE DE LAS CLASES Y CURSOS
+//vamos a eliminar la entidad course porq esa verga esta mal
+// esta asignatura tiene un listado de grupos (que son cuantos grupos pueden salir de una misma asigntatura)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSubject;
 
 
-       @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-       @Column(name = "content")
+    @Column(name = "content")
     private String content;
 
-       @Column(name = "objetives")
+    @Column(name = "objetives")
     private String objetives;
 
-       @Column(name = "competencies")
+    @Column(name = "competencies")
     private String competencies;
 
+    @OneToMany(mappedBy = "Prerequisite")
+    private List<Subject> prerequisite;
 
-    @ManyToOne
-    @JoinColumn(name = "idPrerequisite")
-    private Prerequisite prerequisite;
-
-    @OneToMany(mappedBy = "subject")
-    private List<Course> courses;
+    @OneToMany(mappedBy = "groups")
+    private List<Group> groups;
 }

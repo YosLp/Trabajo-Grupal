@@ -11,15 +11,13 @@ public class Classroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idClassroom;
+    private Long idClassroom;
 
     @Column(name = "location")
     private String location;
 
      @Column(name = "capacity")
     private String capacity;
-
-
 
     @OneToMany(mappedBy = "classroom")
     private List<Class> classes;

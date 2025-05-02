@@ -19,12 +19,17 @@ public class Attendance {
     @Column(name = "localdate")
     private Date localdate;
 
-        @Column(name = "status")
+    @Column(name = "status")
     private Boolean status;
 
-        @ManyToOne
-    @JoinColumn(name = "idSchedule", nullable = false)
-    private Schedule schedule;
+
+    @ManyToOne
+    @JoinColumn(name = "idStudent", nullable = false)
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "idClass", nullable = false)
+    private Class classes;
 
 
 }

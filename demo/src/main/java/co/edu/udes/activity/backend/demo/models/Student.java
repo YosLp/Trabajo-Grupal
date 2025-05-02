@@ -3,6 +3,9 @@ package co.edu.udes.activity.backend.demo.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "student")
@@ -24,6 +27,9 @@ public class Student extends User {
     @ManyToOne
     @JoinColumn(name = "Career_id", nullable = false)
     private Career career;
+
+    @OneToMany(mappedBy = "Student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Attendance> attendances = new HashSet<>();
 
     public Student() {
     }

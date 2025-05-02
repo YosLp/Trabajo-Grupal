@@ -1,12 +1,16 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.SubjectDTO;
+import co.edu.udes.activity.backend.demo.dto.SubjectRequestDTO;
 import co.edu.udes.activity.backend.demo.models.Subject;
 import co.edu.udes.activity.backend.demo.repositories.SubjectRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectService {
@@ -14,34 +18,43 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    public List<Subject> getAllSubjects() {
-        return subjectRepository.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public SubjectDTO createSubject(SubjectRequestDTO dto) {
+        Subject subject = modelMapper.map(dto, Subject.class);
+        return modelMapper.map(subjectRepository.save(subject), SubjectDTO.class);
     }
 
-    public Optional<Subject> getSubjectById(Integer id) {
-        return subjectRepository.findById(id);
+    public List<SubjectDTO> getAllSubjects() {
+        return subjectRepository.findAll()
+                .stream()
+                .map(s -> modelMapper.map(s, SubjectDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Subject saveSubject(Subject subject) {
-        return subjectRepository.save(subject);
+    public SubjectDTO assignPrerequisite(Long subjectId, Long prerequisiteId) {
+        Subject subject = subjectRepository.findById(subjectId)
+                .orElseThrow(() -> new RuntimeException("Materia no encontrada"));
+
+        Subject prerequisite = subjectRepository.findById(prerequisiteId)
+                .orElseThrow(() -> new RuntimeException("Prerequisito no encontrado"));
+
+        subject.getPrerequisite().add(prerequisite);
+        return modelMapper.map(subjectRepository.save(subject), SubjectDTO.class);
     }
 
-    public Subject updateSubject(Integer id, Subject updatedSubject) {
-        return subjectRepository.findById(id).map(subject -> {
-            subject.setName(updatedSubject.getName());
-            subject.setContent(updatedSubject.getContent());
-            subject.setObjetives(updatedSubject.getObjetives());
-            subject.setCompetencies(updatedSubject.getCompetencies());
-            subject.setPrerequisite(updatedSubject.getPrerequisite());
-            return subjectRepository.save(subject);
-        }).orElse(null);
+    public List<SubjectDTO> getPrerequisites(Long subjectId) {
+        Subject subject = subjectRepository.findById(subjectId)
+                .orElseThrow(() -> new RuntimeException("Materia no encontrada"));
+
+        return subject.getPrerequisite()
+                .stream()
+                .map(p -> modelMapper.map(p, SubjectDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public boolean deleteSubject(Integer id) {
-        if (subjectRepository.existsById(id)) {
-            subjectRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    public void deleteSubject(Long id) {
+        subjectRepository.deleteById(id);
     }
 }

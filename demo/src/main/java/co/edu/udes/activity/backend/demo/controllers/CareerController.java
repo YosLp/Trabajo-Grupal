@@ -1,5 +1,8 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.CareerDTO;
+import co.edu.udes.activity.backend.demo.dto.CareerRequestDTO;
+import co.edu.udes.activity.backend.demo.dto.SubjectDTO;
 import co.edu.udes.activity.backend.demo.models.Career;
 import co.edu.udes.activity.backend.demo.services.CareerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +18,35 @@ public class CareerController {
     @Autowired
     private CareerService careerService;
 
+    @PostMapping
+    public CareerDTO createCareer(@RequestBody CareerRequestDTO dto) {
+        return careerService.createCareer(dto);
+    }
+
     @GetMapping
-    public List<Career> getAllCareers() {
+    public List<CareerDTO> getAllCareers() {
         return careerService.getAllCareers();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Career> getCareerById(@PathVariable Integer id) {
-        return careerService.getCareerById(id);
+    @PostMapping("/{careerId}/subjects/{subjectId}")
+    public CareerDTO assignSubjectToCareer(
+            @PathVariable long careerId,
+            @PathVariable long subjectId) {
+        return careerService.assignSubjectToCareer(careerId, subjectId);
     }
 
-    @PostMapping
-    public Career createCareer(@RequestBody Career career) {
-        return careerService.saveCareer(career);
+    @GetMapping("/{careerId}/subjects")
+    public List<SubjectDTO> getSubjectsByCareer(@PathVariable Long careerId) {
+        return careerService.getSubjectsByCareer(careerId);
     }
 
-    @PutMapping("/{id}")
-    public Career updateCareer(@PathVariable Integer id, @RequestBody Career updatedCareer) {
-        return careerService.updateCareer(id, updatedCareer);
+    @GetMapping("/semester/{semesterId}")
+    public List<CareerDTO> getCareersBySemester(@PathVariable Long semesterId) {
+        return careerService.getCareersBySemester(semesterId);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCareer(@PathVariable Integer id) {
-        boolean deleted = careerService.deleteCareer(id);
-        return deleted ? "Career deleted successfully" : "Career not found with id: " + id;
+    public void deleteCareer(@PathVariable Long id) {
+        careerService.deleteCareer(id);
     }
 }

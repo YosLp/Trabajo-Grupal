@@ -18,15 +18,12 @@ public class ClassroomService {
         return classroomRepository.findAll();
     }
 
-    public Optional<Classroom> getClassroomById(Integer id) {
-        return classroomRepository.findById(id);
-    }
 
     public Classroom saveClassroom(Classroom classroom) {
         return classroomRepository.save(classroom);
     }
 
-    public Classroom updateClassroom(Integer id, Classroom updatedClassroom) {
+    public Classroom updateClassroom(Long id, Classroom updatedClassroom) {
         return classroomRepository.findById(id).map(classroom -> {
             classroom.setLocation(updatedClassroom.getLocation());
             classroom.setCapacity(updatedClassroom.getCapacity());
@@ -34,7 +31,7 @@ public class ClassroomService {
         }).orElse(null);
     }
 
-    public boolean deleteClassroom(Integer id) {
+    public boolean deleteClassroom(Long id) {
         if (classroomRepository.existsById(id)) {
             classroomRepository.deleteById(id);
             return true;

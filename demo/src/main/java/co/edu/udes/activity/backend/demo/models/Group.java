@@ -26,18 +26,13 @@ public class Group {
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name = "idCourse")
-    private Course course;
+    @JoinColumn(name = "Subject")
+    private Subject subject;
 
     @OneToMany(mappedBy = "group")
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "group")
-    private List<Evaluation> evaluations;
-
-    @OneToMany(mappedBy = "group")
     private List<Class> classes;
 
-    @OneToMany(mappedBy = "group")
-    private List<AcademicRecord> academicRecords;
 }

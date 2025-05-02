@@ -3,7 +3,9 @@ package co.edu.udes.activity.backend.demo.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,15 +31,9 @@ public class Enrollment {
     @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "qualification")
-    private Double qualification;
+    @Column(name = "Final_qualification")
+    private Double finalQualification;
 
-    @Column(name = "P1_qualification")
-    private Double p1Qualification;
-
-    @Column(name = "P2_qualification")
-    private Double p2Qualification;
-
-    @Column(name = "P3_qualification")
-    private Double p3Qualification;
+    @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cut> cuts = new ArrayList<>();
 }

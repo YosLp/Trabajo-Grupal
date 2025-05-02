@@ -66,7 +66,7 @@ public class ClassroomController {
         @ApiResponse(responseCode = "404", description = "Aula no encontrada")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<ClassroomDTO> updateClassroom(@PathVariable Integer id, @Valid @RequestBody ClassroomDTO classroomDTO) {
+    public ResponseEntity<ClassroomDTO> updateClassroom(@PathVariable Long id, @Valid @RequestBody ClassroomDTO classroomDTO) {
         Classroom updated = classroomService.updateClassroom(id, convertToEntity(classroomDTO));
         if (updated != null) {
             return ResponseEntity.ok(convertToDTO(updated));
@@ -81,7 +81,7 @@ public class ClassroomController {
         @ApiResponse(responseCode = "404", description = "Aula no encontrada")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteClassroom(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteClassroom(@PathVariable Long id) {
         boolean deleted = classroomService.deleteClassroom(id);
         if (deleted) {
             return ResponseEntity.ok("Classroom deleted successfully");
@@ -90,8 +90,6 @@ public class ClassroomController {
         }
     }
 
-    // ---------------------------------------
-    // Métodos para convertir entre Entity y DTO
     private ClassroomDTO convertToDTO(Classroom classroom) {
         ClassroomDTO dto = new ClassroomDTO();
         dto.setIdClassroom(classroom.getIdClassroom());
@@ -99,8 +97,8 @@ public class ClassroomController {
         dto.setCapacity(classroom.getCapacity());
         if (classroom.getClasses() != null) {
             dto.setClassIds(classroom.getClasses().stream()
-                    .map(c -> c.getIdClass())
-                    .collect(Collectors.toList()));
+                    .map(c -> c.getIdClass().intValue())
+                    .collect(Collectors.toList()).reversed());
         }
         return dto;
     }

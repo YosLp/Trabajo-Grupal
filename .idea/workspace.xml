@@ -4,7 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="" />
+    <list default="true" id="6d213bd5-8b30-469e-9092-eb12d60168f0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Period.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/co/edu/udes/activity/backend/demo/models/Period.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/CareerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/ClassController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/ClassroomController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/CourseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/EnrollmentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/GroupController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/controllers/SubjectController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/CareerDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/ClassDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/ClassroomDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/CourseDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/EnrollmentDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/GroupDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/StudentDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/StudentScheduleDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/dto/SubjectDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Attendance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Career.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Class.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Classroom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Course.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Enrollment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Group.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Period.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/models/Subject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/CareerRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/ClassRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/ClassroomRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/CourseRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/EnrollmentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/GroupRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/repositories/SubjectRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/CareerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/ClassService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/ClassroomService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/CourseService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/EnrollmentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/GroupService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/ScheduleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/co/edu/udes/activity/backend/demo/services/SubjectService.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +147,7 @@
       <workItem from="1745908467673" duration="435000" />
       <workItem from="1745908991409" duration="1277000" />
       <workItem from="1746301411181" duration="320000" />
+      <workItem from="1746638302344" duration="438000" />
     </task>
     <servers />
   </component>

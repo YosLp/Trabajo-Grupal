@@ -26,6 +26,4 @@ public class Period {
 
 
 
-    @OneToMany(mappedBy = "period")
-    private List<Course> courses;
 }

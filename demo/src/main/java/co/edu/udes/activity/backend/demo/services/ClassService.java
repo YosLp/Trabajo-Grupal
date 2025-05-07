@@ -63,7 +63,7 @@ public class ClassService {
     }
 
     public ClassDTO updateClass(Long id, ClassRequestDTO dto) {
-        Class classEntity = classRepository.findById(id)
+        Class classEntity = classRepository.findById(Math.toIntExact(id))
                 .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
 
         classEntity.setFecha(dto.getFecha());
@@ -74,6 +74,6 @@ public class ClassService {
     }
 
     public void deleteClass(Long id) {
-        classRepository.deleteById(id);
+        classRepository.deleteById(Math.toIntExact(id));
     }
 }

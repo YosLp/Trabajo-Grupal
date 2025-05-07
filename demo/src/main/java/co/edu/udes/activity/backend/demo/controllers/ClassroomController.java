@@ -108,7 +108,6 @@ public class ClassroomController {
         classroom.setIdClassroom(dto.getIdClassroom() != null ? dto.getIdClassroom() : 0);
         classroom.setLocation(dto.getLocation());
         classroom.setCapacity(dto.getCapacity());
-        // No seteamos clases aquí (solo en controladores avanzados)
         return classroom;
     }
 }

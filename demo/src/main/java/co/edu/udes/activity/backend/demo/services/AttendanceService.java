@@ -30,7 +30,6 @@ public class AttendanceService {
         return attendanceRepository.findById(id).map(att -> {
             att.setLocaldate(updatedAttendance.getLocaldate());
             att.setStatus(updatedAttendance.getStatus());
-            att.setSchedule(updatedAttendance.getSchedule());
             return attendanceRepository.save(att);
         }).orElse(null);
     }

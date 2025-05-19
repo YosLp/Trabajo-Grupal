@@ -46,7 +46,7 @@ public class ReportService {
             report.setGenerationDate(dto.getGenerationDate());
             report.setContent(dto.getContent());
 
-            subjectRepository.findById((int) dto.getSubjectId()).ifPresent(report::setSubject);
+            subjectRepository.findById(dto.getSubjectId()).ifPresent(report::setSubject);
             studentRepository.findById(dto.getStudentId()).ifPresent(report::setStudent);
             academicRecordRepository.findById(dto.getAcademicRecordId()).ifPresent(report::setAcademicRecord);
 
@@ -97,7 +97,7 @@ public class ReportService {
         report.setGenerationDate(dto.getGenerationDate());
         report.setContent(dto.getContent());
 
-        subjectRepository.findById((int) dto.getSubjectId()).ifPresent(report::setSubject);
+        subjectRepository.findById(dto.getSubjectId()).ifPresent(report::setSubject);
         studentRepository.findById(dto.getStudentId()).ifPresent(report::setStudent);
         academicRecordRepository.findById(dto.getAcademicRecordId()).ifPresent(report::setAcademicRecord);
 

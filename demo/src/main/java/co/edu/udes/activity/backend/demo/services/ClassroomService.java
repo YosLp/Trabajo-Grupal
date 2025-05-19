@@ -18,6 +18,9 @@ public class ClassroomService {
         return classroomRepository.findAll();
     }
 
+    public Optional<Classroom> getClassroomById(Long id) {
+        return classroomRepository.findById(id);
+    }
 
     public Classroom saveClassroom(Classroom classroom) {
         return classroomRepository.save(classroom);

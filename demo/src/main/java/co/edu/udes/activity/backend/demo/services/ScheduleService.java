@@ -83,7 +83,7 @@ public class ScheduleService {
                     dto.setClassName(clazz.getDescription());
                     dto.setStartHour(fmt.format(clazz.getStarHour()));
                     dto.setEndHour(fmt.format(clazz.getEndHour()));
-                    dto.setCourseName(clazz.getGroup().getCourse().getName());
+                    dto.setCourseName(clazz.getGroup().getName());
                     result.add(dto);
                 }
             }
@@ -108,7 +108,7 @@ public class ScheduleService {
                 if (clazz.getGroup().getTeacher().getId() == idTeacher) {
                     found = true;
                     TeacherScheduleDTO dto = new TeacherScheduleDTO();
-                    dto.setGroupName(clazz.getGroup().getCourse().getName());
+                    dto.setGroupName(clazz.getGroup().getName());
                     dto.setClassName(clazz.getDescription());
                     dto.setStartHour(fmt.format(clazz.getStarHour()));
                     dto.setEndHour(fmt.format(clazz.getEndHour()));

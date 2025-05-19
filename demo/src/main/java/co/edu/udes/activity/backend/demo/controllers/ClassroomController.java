@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import jakarta.validation.Valid;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +26,7 @@ public class ClassroomController {
 
     @Operation(summary = "Obtener todas las aulas")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Listado obtenido exitosamente")
+            @ApiResponse(responseCode = "200", description = "Listado obtenido exitosamente")
     })
     @GetMapping
     public List<ClassroomDTO> getAllClassrooms() {
@@ -36,11 +38,11 @@ public class ClassroomController {
 
     @Operation(summary = "Obtener un aula por su ID")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Aula encontrada"),
-        @ApiResponse(responseCode = "404", description = "Aula no encontrada")
+            @ApiResponse(responseCode = "200", description = "Aula encontrada"),
+            @ApiResponse(responseCode = "404", description = "Aula no encontrada")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ClassroomDTO> getClassroomById(@PathVariable Integer id) {
+    public ResponseEntity<ClassroomDTO> getClassroomById(@PathVariable Long id) {
         Optional<Classroom> classroomOpt = classroomService.getClassroomById(id);
         if (classroomOpt.isPresent()) {
             return ResponseEntity.ok(convertToDTO(classroomOpt.get()));
@@ -51,7 +53,7 @@ public class ClassroomController {
 
     @Operation(summary = "Crear un aula")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Aula creada exitosamente")
+            @ApiResponse(responseCode = "201", description = "Aula creada exitosamente")
     })
     @PostMapping
     public ResponseEntity<ClassroomDTO> createClassroom(@Valid @RequestBody ClassroomDTO classroomDTO) {
@@ -62,8 +64,8 @@ public class ClassroomController {
 
     @Operation(summary = "Actualizar un aula")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Aula actualizada exitosamente"),
-        @ApiResponse(responseCode = "404", description = "Aula no encontrada")
+            @ApiResponse(responseCode = "200", description = "Aula actualizada exitosamente"),
+            @ApiResponse(responseCode = "404", description = "Aula no encontrada")
     })
     @PutMapping("/{id}")
     public ResponseEntity<ClassroomDTO> updateClassroom(@PathVariable Long id, @Valid @RequestBody ClassroomDTO classroomDTO) {
@@ -77,8 +79,8 @@ public class ClassroomController {
 
     @Operation(summary = "Eliminar un aula")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Aula eliminada exitosamente"),
-        @ApiResponse(responseCode = "404", description = "Aula no encontrada")
+            @ApiResponse(responseCode = "200", description = "Aula eliminada exitosamente"),
+            @ApiResponse(responseCode = "404", description = "Aula no encontrada")
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClassroom(@PathVariable Long id) {
@@ -96,16 +98,18 @@ public class ClassroomController {
         dto.setLocation(classroom.getLocation());
         dto.setCapacity(classroom.getCapacity());
         if (classroom.getClasses() != null) {
-            dto.setClassIds(classroom.getClasses().stream()
+            List<Integer> classIds = classroom.getClasses().stream()
                     .map(c -> c.getIdClass().intValue())
-                    .collect(Collectors.toList()).reversed());
+                    .collect(Collectors.toList());
+            Collections.reverse(classIds); // corrección de reversed()
+            dto.setClassIds(classIds);
         }
         return dto;
     }
 
     private Classroom convertToEntity(ClassroomDTO dto) {
         Classroom classroom = new Classroom();
-        classroom.setIdClassroom(dto.getIdClassroom() != null ? dto.getIdClassroom() : 0);
+        classroom.setIdClassroom(dto.getIdClassroom()); // corrección: no forzar ID = 0
         classroom.setLocation(dto.getLocation());
         classroom.setCapacity(dto.getCapacity());
         return classroom;

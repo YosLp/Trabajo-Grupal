@@ -83,6 +83,7 @@ public class AuthenticationService {
             Authentication authentication = authOpt.orElse(new Authentication());
             authentication.setUser(user);
 
+
             if (authentication.isLocked()) {
                 throw new RuntimeException("La cuenta está bloqueada.");
             }

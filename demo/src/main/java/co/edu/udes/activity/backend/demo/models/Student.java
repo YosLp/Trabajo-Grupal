@@ -28,8 +28,9 @@ public class Student extends User {
     @JoinColumn(name = "Career_id", nullable = false)
     private Career career;
 
-    @OneToMany(mappedBy = "Student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true) // Cambié "Student" a "student"
     private Set<Attendance> attendances = new HashSet<>();
+
 
     public Student() {
     }

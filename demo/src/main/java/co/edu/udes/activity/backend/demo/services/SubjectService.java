@@ -40,7 +40,7 @@ public class SubjectService {
         Subject prerequisite = subjectRepository.findById(prerequisiteId)
                 .orElseThrow(() -> new RuntimeException("Prerequisito no encontrado"));
 
-        subject.getPrerequisite().add(prerequisite);
+        subject.getPrerequisites().add(prerequisite);
         return modelMapper.map(subjectRepository.save(subject), SubjectDTO.class);
     }
 
@@ -48,7 +48,7 @@ public class SubjectService {
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Materia no encontrada"));
 
-        return subject.getPrerequisite()
+        return subject.getPrerequisites()
                 .stream()
                 .map(p -> modelMapper.map(p, SubjectDTO.class))
                 .collect(Collectors.toList());

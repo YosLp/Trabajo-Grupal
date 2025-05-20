@@ -22,14 +22,11 @@ public class Attendance {
     @Column(name = "status")
     private Boolean status;
 
-
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "idClass", nullable = false)
-    private Class classes;
-
-
+    private Class classes; // El nombre del campo es 'classes' (con 'c' minúscula)
 }

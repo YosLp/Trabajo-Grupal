@@ -37,7 +37,7 @@ public class StudentService {
             student.setFirstName(updatedDTO.getFirstName());
             student.setLastName(updatedDTO.getLastName());
             student.setEmail(updatedDTO.getEmail());
-            student.setStatus(Boolean.valueOf(updatedDTO.getStatus()));
+            student.setStatus(Boolean.valueOf(updatedDTO.getStatusStudent()));
             student.setPhoneNumber(updatedDTO.getPhoneNumber());
             student.setAddress(updatedDTO.getAddress());
             student.setRegistrationDate(updatedDTO.getRegistrationDate());

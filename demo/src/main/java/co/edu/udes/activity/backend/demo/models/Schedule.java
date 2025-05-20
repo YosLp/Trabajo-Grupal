@@ -14,7 +14,7 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idSchedule;
+    private Long idSchedule;
 
 
     @Column(name = "starHour")

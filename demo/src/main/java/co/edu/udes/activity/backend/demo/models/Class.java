@@ -34,6 +34,10 @@ public class Class {
     @JoinColumn(name = "idClassroom", nullable = false)
     private Classroom classroom;
 
-    @OneToMany(mappedBy = "Class", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Attendance> atttendances = new HashSet<>();
+    @OneToMany(mappedBy = "classes", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Attendance> attendances = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
 }

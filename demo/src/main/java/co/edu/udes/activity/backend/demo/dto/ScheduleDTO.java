@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class ScheduleDTO {
 
-    private Integer idSchedule;
+    private Long idSchedule;
     private Date starHour;
     private Date endHour;
-    private List<Integer> classIds;
+    private List<Long> classIds;
 
 }

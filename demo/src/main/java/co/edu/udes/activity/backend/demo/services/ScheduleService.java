@@ -80,7 +80,6 @@ public class ScheduleService {
                 if (matches) {
                     found = true;
                     StudentScheduleDTO dto = new StudentScheduleDTO();
-                    dto.setClassName(clazz.getDescription());
                     dto.setStartHour(fmt.format(clazz.getStarHour()));
                     dto.setEndHour(fmt.format(clazz.getEndHour()));
                     dto.setCourseName(clazz.getGroup().getName());
@@ -109,7 +108,6 @@ public class ScheduleService {
                     found = true;
                     TeacherScheduleDTO dto = new TeacherScheduleDTO();
                     dto.setGroupName(clazz.getGroup().getName());
-                    dto.setClassName(clazz.getDescription());
                     dto.setStartHour(fmt.format(clazz.getStarHour()));
                     dto.setEndHour(fmt.format(clazz.getEndHour()));
                     result.add(dto);
@@ -134,7 +132,7 @@ public class ScheduleService {
                     s.getClasses()
                      .stream()
                      .map(Class::getIdClass)
-                     .collect(Collectors.toList())
+                     .collect(Collectors.toList()).reversed()
             );
         }
         return dto;

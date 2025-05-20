@@ -11,6 +11,10 @@ public class Cut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "semester_id", nullable = false) // Añade esta columna en la tabla 'cut'
+    private Semester semester; // ¡Nuevo campo para la relación con Semester!
+
     @ManyToOne
     @JoinColumn(name = "enrollment_id", nullable = false)
     private Enrollment enrollment;

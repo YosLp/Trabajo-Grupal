@@ -14,7 +14,7 @@ public class Enrollment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEnrollment;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "idStudent", nullable = false)

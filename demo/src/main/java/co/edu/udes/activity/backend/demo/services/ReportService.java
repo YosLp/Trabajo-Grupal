@@ -84,7 +84,7 @@ public class ReportService {
         dto.setReportType(report.getReportType());
         dto.setGenerationDate(report.getGenerationDate());
         dto.setContent(report.getContent());
-        dto.setSubjectId(report.getSubject().getIdSubject());
+        dto.setSubjectId(report.getSubject().getId());
         dto.setStudentId(report.getStudent().getId());
         dto.setAcademicRecordId(report.getAcademicRecord().getIdAcademicRecord());
         return dto;

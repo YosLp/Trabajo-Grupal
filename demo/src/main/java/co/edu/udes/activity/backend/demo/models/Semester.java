@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table (name="semester")
 public class Semester {
 
     @Id
@@ -18,7 +19,7 @@ public class Semester {
     @Column (name="name")
     private String name;
 
-    @OneToMany(mappedBy = "Semester", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL) // 'semester' con 's' minúscula
     private List<Cut> cuts = new ArrayList<>();
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -28,5 +29,4 @@ public class Semester {
             inverseJoinColumns = @JoinColumn(name = "career_id")
     )
     private List<Career> careers = new ArrayList<>();
-
 }

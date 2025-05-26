@@ -94,7 +94,12 @@ public class AuthenticationService {
                 authentication.setExpirationDate(LocalDateTime.now().plusHours(1));
                 authenticationRepository.save(authentication);
 
-                return modelMapper.map(authentication, AuthenticationDTO.class);
+                AuthenticationDTO dto = modelMapper.map(authentication, AuthenticationDTO.class);
+                dto.setUserId(user.getId());
+                dto.setNombre(user.getFirstName());
+                dto.setRol(user.getRole().getName());
+
+                return dto;
             } else {
                 int intentos = authentication.getFailedAttempts() + 1;
                 authentication.setFailedAttempts(intentos);

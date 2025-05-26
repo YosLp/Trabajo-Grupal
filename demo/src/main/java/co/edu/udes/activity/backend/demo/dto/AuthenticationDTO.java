@@ -12,4 +12,6 @@ public class AuthenticationDTO {
     private long userId;
     private String sessionToken;
     private LocalDateTime expirationDate;
+    private String nombre;
+    private String rol;
 }

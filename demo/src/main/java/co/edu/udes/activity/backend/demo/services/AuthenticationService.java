@@ -83,7 +83,6 @@ public class AuthenticationService {
             Authentication authentication = authOpt.orElse(new Authentication());
             authentication.setUser(user);
 
-
             if (authentication.isLocked()) {
                 throw new RuntimeException("La cuenta está bloqueada.");
             }
@@ -94,6 +93,7 @@ public class AuthenticationService {
                 authentication.setSessionToken(UUID.randomUUID().toString());
                 authentication.setExpirationDate(LocalDateTime.now().plusHours(1));
                 authenticationRepository.save(authentication);
+
                 return modelMapper.map(authentication, AuthenticationDTO.class);
             } else {
                 int intentos = authentication.getFailedAttempts() + 1;

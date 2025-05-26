@@ -10,4 +10,6 @@ public class AuthenticationDTO {
     private int failedAttempts;
     private boolean locked;
     private long userId;
+    private String sessionToken;
+    private LocalDateTime expirationDate;
 }

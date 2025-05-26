@@ -63,7 +63,8 @@ public class AuthenticationController {
     public ResponseEntity<String> deleteAuthentication(@PathVariable Long id) {
         boolean deleted = authenticationService.deleteAuthentication(id);
         return deleted ? ResponseEntity.ok("Autenticación eliminada correctamente") :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la autenticación con ID: " + id);
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la autenticación " +
+                        "con ID: " + id);
     }
 
     @PostMapping("/login")

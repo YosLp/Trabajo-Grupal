@@ -11,4 +11,5 @@ public class UserRequestDTO {
     private String password;
     private Boolean status;
     private Long roleId;
+    private String documentNumber;
 }

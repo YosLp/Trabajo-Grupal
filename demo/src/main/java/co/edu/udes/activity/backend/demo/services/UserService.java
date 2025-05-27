@@ -40,12 +40,22 @@ public class UserService {
         Optional<User> user = userRepository.findByDocumentNumber(documentNumber);
         return user.map(this::convertToDTO).orElse(null);}
 
-    public UserDTO saveUser(UserRequestDTO userRequestDTO) {
-        User user = convertToEntity(userRequestDTO);
-        Optional<Role> role = roleRepository.findById(userRequestDTO.getRoleId());
-        role.ifPresent(user::setRole);
-        User saved = userRepository.save(user);
-        return convertToDTO(saved);
+    public User saveUser(UserRequestDTO userDTO) {
+
+        User user = new User();
+        System.out.println("Documento: " + userDTO.getDocumentNumber());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setStatus(userDTO.getStatus());
+        user.setDocumentNumber(userDTO.getDocumentNumber());
+
+        Role role = roleRepository.findById(userDTO.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        user.setRole(role);
+
+        return userRepository.save(user);
     }
 
     public UserDTO updateUser(Long id, UserRequestDTO updatedDTO) {

@@ -2,8 +2,10 @@ package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.dto.UserDTO;
 import co.edu.udes.activity.backend.demo.dto.UserRequestDTO;
+import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -48,9 +50,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserRequestDTO userRequestDTO) {
-        UserDTO userDTO = userService.saveUser(userRequestDTO);
-        return ResponseEntity.ok(userDTO);
+    public ResponseEntity<?> createUser(@RequestBody UserRequestDTO userDTO) {
+        try {
+            User createdUser = userService.saveUser(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocurrió un error al registrar el usuario. Detalle: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

@@ -1,9 +1,11 @@
 package co.edu.udes.activity.backend.demo.services;
 
+import co.edu.udes.activity.backend.demo.dto.TeacherCreateDTO;
 import co.edu.udes.activity.backend.demo.dto.TeacherDTO;
 import co.edu.udes.activity.backend.demo.models.Role;
 import co.edu.udes.activity.backend.demo.models.Teacher;
 import co.edu.udes.activity.backend.demo.repositories.TeacherRepository;
+import co.edu.udes.activity.backend.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+    private  UserRepository userRepository;
 
     public List<TeacherDTO> getAllTeachers() {
         return teacherRepository.findAll()
@@ -41,9 +45,22 @@ public class TeacherService {
 
 
 
-    public TeacherDTO saveTeacher(TeacherDTO dto) {
+    public TeacherDTO saveTeacher(TeacherCreateDTO dto) {
         Teacher teacher = convertToEntity(dto);
         return convertToDTO(teacherRepository.save(teacher));
+    }
+
+    public Teacher convertToEntity(TeacherCreateDTO dto) {
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + dto.getUserId()));
+
+        Teacher teacher = new Teacher();
+        teacher.setUser(user);
+        teacher.setSpecialization(dto.getSpecialization());
+        teacher.setInstitutionalCode(dto.getInstitutionalCode());
+        teacher.setStatusContract(dto.getStatusContract());
+
+        return teacher;
     }
 
     public TeacherDTO updateTeacher(Long id, TeacherDTO updatedDTO) {

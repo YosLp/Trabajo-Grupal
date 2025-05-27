@@ -1,5 +1,6 @@
 package co.edu.udes.activity.backend.demo.controllers;
 
+import co.edu.udes.activity.backend.demo.dto.TeacherCreateDTO;
 import co.edu.udes.activity.backend.demo.dto.TeacherDTO;
 import co.edu.udes.activity.backend.demo.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class TeacherController {
 
 
     @PostMapping
-    public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
-        return ResponseEntity.ok(teacherService.saveTeacher(teacherDTO));
+    public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherCreateDTO teacherCreateDTO) {
+        return ResponseEntity.ok(teacherService.saveTeacher(teacherCreateDTO));
     }
 
     @PutMapping("/{id}")

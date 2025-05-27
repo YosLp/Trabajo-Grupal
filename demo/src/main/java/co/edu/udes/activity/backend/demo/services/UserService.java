@@ -2,6 +2,7 @@ package co.edu.udes.activity.backend.demo.services;
 
 import co.edu.udes.activity.backend.demo.dto.UserDTO;
 import co.edu.udes.activity.backend.demo.dto.UserRequestDTO;
+import co.edu.udes.activity.backend.demo.dto.UserWPasswordDto;
 import co.edu.udes.activity.backend.demo.models.Role;
 import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.repositories.RoleRepository;
@@ -36,9 +37,22 @@ public class UserService {
         return user.map(this::convertToDTO).orElse(null);
     }
 
-    public UserDTO getUserByDocumentNumber(String documentNumber) {
+    public UserWPasswordDto getUserWithPasswordByDocumentNumber(String documentNumber) {
         Optional<User> user = userRepository.findByDocumentNumber(documentNumber);
-        return user.map(this::convertToDTO).orElse(null);}
+        return user.map(this::convertToUserWPasswordDto).orElse(null);
+    }
+
+    private UserWPasswordDto convertToUserWPasswordDto(User user) {
+        UserWPasswordDto dto = new UserWPasswordDto();
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setPassword(user.getPassword()); // ← ahora sí se incluye
+        dto.setStatus(user.getStatus());
+        dto.setRoleId(user.getRole().getId());
+        dto.setDocumentNumber(user.getDocumentNumber());
+        return dto;
+    }
 
     public User saveUser(UserRequestDTO userDTO) {
 

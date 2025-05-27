@@ -2,6 +2,7 @@ package co.edu.udes.activity.backend.demo.controllers;
 
 import co.edu.udes.activity.backend.demo.dto.UserDTO;
 import co.edu.udes.activity.backend.demo.dto.UserRequestDTO;
+import co.edu.udes.activity.backend.demo.dto.UserWPasswordDto;
 import co.edu.udes.activity.backend.demo.models.User;
 import co.edu.udes.activity.backend.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class UserController {
         return ResponseEntity.ok(isAuthenticated);
     }
 
-    @GetMapping("/document/{documentNumber}") // Nuevo endpoint para buscar por documento
-    public ResponseEntity<UserDTO> getUserByDocument(@PathVariable String documentNumber) {
-        UserDTO user = userService.getUserByDocumentNumber(documentNumber);
+    @GetMapping("/document-with-password/{documentNumber}")
+    public ResponseEntity<UserWPasswordDto> getUserWithPasswordByDocument(@PathVariable String documentNumber) {
+        UserWPasswordDto user = userService.getUserWithPasswordByDocumentNumber(documentNumber);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 

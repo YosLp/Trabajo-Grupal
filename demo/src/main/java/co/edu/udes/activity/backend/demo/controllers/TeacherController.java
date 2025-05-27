@@ -31,6 +31,27 @@ public class TeacherController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    public ResponseEntity<TeacherDTO> getTeacherByDocumentNumber(@PathVariable String documentNumber) {
+        return teacherService.getTeacherByDocumentNumber(documentNumber)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/teachers/document/{documentNumber}")
+    public ResponseEntity<TeacherDTO> getByDocumentNumber(@PathVariable String documentNumber) {
+        return teacherService.getTeacherByDocumentNumber(documentNumber)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/codigo/{institutionalCode}")
+    public ResponseEntity<TeacherDTO> getTeacherByInstitutionalCode(@PathVariable String institutionalCode) {
+        return teacherService.getTeacherByInstitutionalCode(institutionalCode)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
     @PostMapping
     public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
         return ResponseEntity.ok(teacherService.saveTeacher(teacherDTO));

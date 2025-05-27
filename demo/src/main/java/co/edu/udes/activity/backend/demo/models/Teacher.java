@@ -11,6 +11,12 @@ public class Teacher extends User {
     @Column(name = "specialization", nullable = false)
     private String specialization;
 
+    @Column(name = "institutional_code", nullable = false, unique = true)
+    private String institutionalCode;
+
+    @Column(name = "status_contract")
+    private Boolean  statusContract;
+
     @OneToMany(mappedBy = "teacher")
     private List<Group> groups;
 

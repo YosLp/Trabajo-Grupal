@@ -8,8 +8,12 @@ public class TeacherDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String status;
+    private Boolean status;
     private String roleName;
-
     private String specialization;
+    private String password;
+    private String documentNumber;
+    private String institutionalCode;
+    private Boolean statusContract;
 }
+

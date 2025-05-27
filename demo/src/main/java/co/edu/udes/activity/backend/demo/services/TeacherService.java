@@ -29,6 +29,18 @@ public class TeacherService {
                 .map(this::convertToDTO);
     }
 
+    public Optional<TeacherDTO> getTeacherByDocumentNumber(String documentNumber) {
+        return teacherRepository.findByDocumentNumber(documentNumber)
+                .map(this::convertToDTO);
+    }
+
+    public Optional<TeacherDTO> getTeacherByInstitutionalCode(String institutionalCode) {
+        return teacherRepository.findByInstitutionalCode(institutionalCode)
+                .map(this::convertToDTO);
+    }
+
+
+
     public TeacherDTO saveTeacher(TeacherDTO dto) {
         Teacher teacher = convertToEntity(dto);
         return convertToDTO(teacherRepository.save(teacher));
@@ -64,9 +76,13 @@ public class TeacherService {
         dto.setFirstName(teacher.getFirstName());
         dto.setLastName(teacher.getLastName());
         dto.setEmail(teacher.getEmail());
-        dto.setStatus(String.valueOf(teacher.getStatus()));
-        dto.setSpecialization(teacher.getSpecialization());
+        dto.setStatus(teacher.getStatus());
         dto.setRoleName(teacher.getRole() != null ? teacher.getRole().getName() : null);
+        dto.setSpecialization(teacher.getSpecialization());
+        dto.setPassword(teacher.getPassword());
+        dto.setDocumentNumber(teacher.getDocumentNumber());
+        dto.setInstitutionalCode(teacher.getInstitutionalCode());
+        dto.setStatusContract(teacher.getStatusContract());
         return dto;
     }
 
@@ -76,13 +92,12 @@ public class TeacherService {
         teacher.setFirstName(dto.getFirstName());
         teacher.setLastName(dto.getLastName());
         teacher.setEmail(dto.getEmail());
-        teacher.setStatus(Boolean.valueOf(dto.getStatus()));
+        teacher.setStatus(dto.getStatus());
         teacher.setSpecialization(dto.getSpecialization());
-
-        Role role = new Role();
-        role.setName(dto.getRoleName());
-        teacher.setRole(role);
-
+        teacher.setPassword(dto.getPassword());
+        teacher.setDocumentNumber(dto.getDocumentNumber());
+        teacher.setInstitutionalCode(dto.getInstitutionalCode());
+        teacher.setStatusContract(dto.getStatusContract());
         return teacher;
     }
 }

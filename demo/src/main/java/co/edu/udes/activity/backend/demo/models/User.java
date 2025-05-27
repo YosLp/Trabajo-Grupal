@@ -26,6 +26,9 @@ public class User {
 
     @Column(name = "status")
     private Boolean status;
+
+    @Column(name = "document_number", unique = true)
+    private String documentNumber;
     
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)

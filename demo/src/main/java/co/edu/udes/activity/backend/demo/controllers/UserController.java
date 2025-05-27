@@ -24,6 +24,12 @@ public class UserController {
         return ResponseEntity.ok(isAuthenticated);
     }
 
+    @GetMapping("/document/{documentNumber}") // Nuevo endpoint para buscar por documento
+    public ResponseEntity<UserDTO> getUserByDocument(@PathVariable String documentNumber) {
+        UserDTO user = userService.getUserByDocumentNumber(documentNumber);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
     @PutMapping("/{id}/change-password")
     public ResponseEntity<String> changePassword(@PathVariable Long id, @RequestBody String newPassword) {
         boolean changed = userService.changePassword(id, newPassword);

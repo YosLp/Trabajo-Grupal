@@ -36,6 +36,10 @@ public class UserService {
         return user.map(this::convertToDTO).orElse(null);
     }
 
+    public UserDTO getUserByDocumentNumber(String documentNumber) {
+        Optional<User> user = userRepository.findByDocumentNumber(documentNumber);
+        return user.map(this::convertToDTO).orElse(null);}
+
     public UserDTO saveUser(UserRequestDTO userRequestDTO) {
         User user = convertToEntity(userRequestDTO);
         Optional<Role> role = roleRepository.findById(userRequestDTO.getRoleId());
